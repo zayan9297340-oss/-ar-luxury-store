@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — AR Store Pakistan</title>
+  <meta name="description" content="Review your cart and checkout with Cash on Delivery.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <div class="announce-bar">
+    <span>📦 Free delivery on orders over Rs. 3,000</span>
+    <span>💵 Cash on Delivery — Open Box Inspection</span>
+  </div>
+  <header class="site-header">
+    <div class="header-main">
+      <a href="index.html" class="logo-block">
+        <div class="logo-ar">AR</div>
+        <div class="logo-text">
+          <span class="brand-name">AR Store</span>
+          <span class="brand-sub">Global · Direct</span>
+        </div>
+      </a>
+      <div class="header-account" onclick="openAccountModal()" title="Your Account" style="cursor:pointer;margin-right:12px;">
+        <span style="font-size:11px;color:#ccc;">Hello, Sign in</span>
+        <strong style="font-size:13px;">Account &amp; Lists</strong>
+      </div>
+      <a href="cart.html" class="cart-header-btn" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span style="font-size:14px;font-weight:700;">Cart</span>
+        <span class="cart-count-badge cart-count-display">0</span>
+      </a>
+    </div>
+  </header>
+
+  <div style="max-width:1200px;margin:0 auto;padding:16px;">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Shopping Cart</span>
+    </div>
+
+    <div class="cart-page" style="max-width:none;margin:0;padding:0;">
+      <!-- Cart Items -->
+      <div class="cart-items-panel">
+        <h1>Shopping Cart</h1>
+        <div id="cartItemsList">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+
+      <!-- Summary Panel -->
+      <div class="cart-summary-panel">
+        <div style="color:#067d62;font-weight:700;font-size:15px;margin-bottom:12px;">
+          ✅ Your order qualifies for COD
+        </div>
+        <div class="summary-row">
+          <span class="label">Subtotal:</span>
+          <span class="value" id="cartSubtotal">Rs. 0</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">Shipping:</span>
+          <span class="value" id="cartShipping">Rs. 250</span>
+        </div>
+        <div class="summary-row" style="color:#067d62;">
+          <span class="label">You Save:</span>
+          <span class="value" id="cartSavedAmount">Rs. 0</span>
+        </div>
+        <div class="summary-total">
+          <span>Order Total:</span>
+          <span id="cartTotal">Rs. 0</span>
+        </div>
+        <a href="checkout.html" class="checkout-now-btn">Proceed to Checkout</a>
+        <a href="checkout.html" class="buy-now-btn">Buy Now (COD)</a>
+        <a href="index.html" style="display:block;text-align:center;margin-top:12px;font-size:13px;color:var(--text-link);">← Continue Shopping</a>
+
+        <div style="margin-top:16px;padding:14px;background:#f7f7f7;border-radius:8px;font-size:12px;color:#555;line-height:1.6;">
+          <strong>🔒 Safe &amp; Secure</strong><br>
+          Cash on Delivery · Open Box Inspection · 7-Day Returns · 5–6 Days Delivery
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Luxury Footer -->
+  <footer style="background: #18181b; color: #FAF6F0; padding: 50px 20px 24px; margin-top: 60px;">
+    <div class="page-canvas luxury-footer-grid" style="max-width: 1320px; margin: 0 auto;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span class="brand-ar-monogram" style="width: 40px; height: 40px; font-size: 1.25rem;">AR</span>
+          <h2 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 2rem; letter-spacing: 0.14em; color: #FFF; margin: 0;">AR LUXURY</h2>
+        </div>
+        <p style="color: #a1a1aa; font-size: 0.85rem; line-height: 1.6; max-width: 320px;">
+          Wireless acoustic audio and luxury atelier creations. Delivering exclusively across Karachi, Sindh with Cash on Delivery (COD).
+        </p>
+        <div style="margin-top: 14px;">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: #f59e0b; text-decoration: none; font-size: 0.82rem; padding: 6px 14px; border: 1px solid rgba(245,158,11,0.35); border-radius: 20px; transition: all 0.2s; background: rgba(255,255,255,0.04);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <span>Follow on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li><a href="airpods.html" style="color: inherit; text-decoration: none;">AirPods &amp; Audio</a></li>
+          <li><a href="tech.html" style="color: inherit; text-decoration: none;">Tech Gadgets</a></li>
+          <li><a href="beauty.html" style="color: inherit; text-decoration: none;">Beauty &amp; Skincare</a></li>
+          <li><a href="watches.html" style="color: inherit; text-decoration: none;">Watches</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Deliveries</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li>Express Delivery (5-6 Days)</li>
+          <li>Delivery Charge: Rs. 250</li>
+          <li>Cash On Delivery (COD)</li>
+          <li>Open Parcel Verification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; text-align: center; color: #a1a1aa; font-size: 0.78rem; margin-top: 30px;">
+      &copy; 2026 AR LUXURY ATELIER. All Rights Reserved &bull; Karachi, Sindh, Pakistan.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCartPage();
+    });
+  </script>
+</body>
+</html>

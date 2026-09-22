@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — AR Store Pakistan</title>
+  <meta name="description" content="Secure COD Checkout — AR Store Pakistan. Cash on Delivery, Karachi.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .checkout-wrap { max-width:1100px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 380px; gap:24px; }
+    @media(max-width:800px){ .checkout-wrap{ grid-template-columns:1fr; } }
+
+    .co-box { background:#fff; border-radius:8px; padding:24px; margin-bottom:16px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+    .co-box h2 { font-size:18px; font-weight:700; margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid #f59e0b; }
+
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:560px){ .form-row{ grid-template-columns:1fr; } }
+
+    .form-group { display:flex; flex-direction:column; gap:5px; }
+    .form-group label { font-size:13px; font-weight:600; color:#333; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding:11px 13px; border:1.5px solid #ddd; border-radius:6px;
+      font-size:14px; font-family:inherit; transition:border .2s;
+      background:#fff; color:#111;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline:none; border-color:#f59e0b; box-shadow:0 0 0 3px rgba(245,158,11,.12); }
+    .form-group textarea { resize:vertical; min-height:80px; }
+
+    .cod-notice {
+      background:#fff8e6; border:1.5px solid #f59e0b; border-radius:8px;
+      padding:14px 16px; display:flex; align-items:flex-start; gap:12px; margin-bottom:18px;
+    }
+    .cod-notice .icon { font-size:24px; flex-shrink:0; }
+    .cod-notice p { font-size:13px; color:#444; line-height:1.6; margin:0; }
+    .cod-notice strong { color:#b45309; }
+
+    .place-order-btn {
+      width:100%; padding:16px; background:#f59e0b; color:#111; border:none;
+      border-radius:8px; font-size:17px; font-weight:800; cursor:pointer;
+      transition:background .2s; letter-spacing:.3px;
+    }
+    .place-order-btn:hover { background:#d97706; }
+
+    /* Order Summary */
+    .summary-box { background:#fff; border-radius:8px; padding:20px; box-shadow:0 1px 6px rgba(0,0,0,.08); position:sticky; top:80px; }
+    .summary-box h3 { font-size:17px; font-weight:700; margin-bottom:14px; border-bottom:2px solid #f59e0b; padding-bottom:8px; }
+    .summary-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f3f3f3; }
+    .summary-item img { width:52px; height:52px; object-fit:cover; border-radius:6px; border:1px solid #eee; }
+    .summary-item-info { flex:1; }
+    .summary-item-info h4 { font-size:13px; font-weight:600; color:#111; line-height:1.3; margin:0 0 3px; }
+    .summary-item-info span { font-size:12px; color:#888; }
+    .summary-item-price { font-size:14px; font-weight:700; color:#111; white-space:nowrap; }
+
+    .summary-totals { margin-top:14px; }
+    .summary-totals .row { display:flex; justify-content:space-between; font-size:14px; padding:5px 0; color:#444; }
+    .summary-totals .row.total { font-size:17px; font-weight:800; color:#111; border-top:2px solid #111; margin-top:8px; padding-top:10px; }
+    .summary-totals .row.save { color:#067d62; font-weight:600; }
+    .free-ship-banner { background:#e6f9f0; border-radius:6px; padding:8px 12px; font-size:12px; color:#065f46; font-weight:600; margin:10px 0; text-align:center; }
+
+    /* Red Input Highlight on Validation Error */
+    input.invalid, select.invalid, textarea.invalid {
+      border: 2px solid #ef4444 !important;
+      background-color: #fff5f5 !important;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18) !important;
+      animation: inputShake 0.35s ease;
+    }
+    @keyframes inputShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .field-err {
+      display: none;
+      font-size: 12px;
+      font-weight: 700;
+      color: #dc2626;
+      margin-top: 5px;
+    }
+    .field-err.show {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Enhanced Luxury Order Confirmed Modal */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .success-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .success-modal {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px 28px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      text-align: center;
+      animation: modalZoom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalZoom {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .success-icon-badge {
+      width: 64px;
+      height: 64px;
+      background: #dcfce7;
+      border: 3px solid #86efac;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);
+    }
+    .success-modal h2 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 6px;
+    }
+    .success-modal .conf-subtext {
+      font-size: 13.5px;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .order-id-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .confirmed-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: left;
+      margin-bottom: 16px;
+    }
+    .confirmed-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .conf-item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .conf-item-row:last-child { border-bottom: none; }
+    .conf-item-row img {
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .conf-item-info { flex: 1; min-width: 0; }
+    .conf-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .conf-item-meta { font-size: 11.5px; color: #64748b; }
+    .conf-item-price { font-weight: 700; font-size: 13px; color: #0f172a; margin-left: 8px; }
+
+    .conf-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #475569;
+      margin-top: 6px;
+    }
+    .conf-total-row.net {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: #0f172a;
+      border-top: 2px solid #cbd5e1;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .conf-dest-box {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #334155;
+      text-align: left;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .continue-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #111;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      transition: all 0.2s;
+    }
+    .continue-btn:hover {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="announce-bar">
+    <span>📦 Free delivery on orders over Rs. 3,000</span>
+    <span>💵 Cash on Delivery — Open Box Inspection Allowed</span>
+  </div>
+  <header class="site-header">
+    <div class="header-main">
+      <a href="index.html" class="logo-block">
+        <div class="logo-ar">AR</div>
+        <div class="logo-text">
+          <span class="brand-name">AR Store</span>
+          <span class="brand-sub">Secure Checkout</span>
+        </div>
+      </a>
+      <div style="flex:1;"></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#aaa;">
+        🔒 <span>Secure COD Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div style="max-width:1100px;margin:0 auto;padding:12px 16px;">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span>
+      <a href="cart.html">Cart</a><span>›</span>
+      <span>Checkout</span>
+    </div>
+  </div>
+
+  <div class="checkout-wrap">
+
+    <!-- LEFT: Form -->
+    <div>
+      <!-- COD Notice -->
+      <div class="cod-notice">
+        <div class="icon">💵</div>
+        <p><strong>Cash on Delivery Available</strong><br>
+        You pay when your parcel arrives. Open box inspection allowed — check before paying. Delivery within <strong>5–6 business days</strong> across Karachi.</p>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="co-box">
+        <h2>1. Contact &amp; Delivery Details</h2>
+        <form id="checkoutForm" novalidate onsubmit="handlePlaceOrder(event)">
+          <div id="checkoutBackendError" style="display:none; background:#fee2e2; border:1px solid #ef4444; color:#b91c1c; padding:12px; border-radius:8px; font-weight:700; font-size:13px; margin-bottom:16px;"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custName">Full Name *</label>
+              <input type="text" id="custName" placeholder="e.g. Ahmed Ali" required autocomplete="name">
+              <span class="field-err" id="custNameErr">Please enter your full name (min 3 letters)</span>
+            </div>
+            <div class="form-group">
+              <label for="custPhone">Mobile Number *</label>
+              <input type="tel" id="custPhone" placeholder="03001234567" required autocomplete="tel">
+              <span class="field-err" id="custPhoneErr">Please enter a valid 11-digit number</span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:14px;">
+            <label for="custAddress">Full Delivery Address *</label>
+            <input type="text" id="custAddress" placeholder="House/Flat No., Street, Area" required autocomplete="street-address">
+            <span class="field-err" id="custAddressErr">Please enter your complete address</span>
+          </div>
+
+          <div class="form-row" style="margin-top:14px;">
+            <div class="form-group">
+              <label for="custCity">City *</label>
+              <select id="custCity" required>
+                <option value="">Select City</option>
+                <option value="Karachi" selected>Karachi</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
+                <option value="Faisalabad">Faisalabad</option>
+                <option value="Multan">Multan</option>
+                <option value="Peshawar">Peshawar</option>
+                <option value="Quetta">Quetta</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="field-err" id="custCityErr">Please select your city</span>
+            </div>
+            <div class="form-group">
+              <label for="custEmail">Email (optional)</label>
+              <input type="email" id="custEmail" placeholder="your@email.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:14px;">
+            <label for="custNotes">Order Notes (optional)</label>
+            <textarea id="custNotes" placeholder="Any special instructions, landmark, or preferred delivery time..."></textarea>
+          </div>
+
+          <!-- Payment Method -->
+          <div style="margin-top:20px;">
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Payment Method</h3>
+            
+            <!-- Option 1: Cash on Delivery -->
+            <label id="labelCod" style="display:flex;align-items:center;gap:10px;padding:14px;border:2px solid #f59e0b;border-radius:8px;cursor:pointer;background:#fff8e6;margin-bottom:10px;transition:all 0.2s;">
+              <input type="radio" name="payment" value="cod" checked onchange="handlePaymentChange('cod')" style="accent-color:#f59e0b;width:18px;height:18px;">
+              <div>
+                <div style="font-weight:700;font-size:14px;color:#111;">💵 Cash on Delivery (COD)</div>
+                <div style="font-size:12px;color:#666;">Pay cash when your parcel arrives at your doorstep</div>
+              </div>
+              <span style="margin-left:auto;font-size:11px;font-weight:700;background:#fef3c7;color:#b45309;padding:3px 8px;border-radius:4px;">POPULAR</span>
+            </label>
+
+            <!-- Option 2: Easypaisa Direct Transfer -->
+            <label id="labelEasypaisa" style="display:flex;align-items:center;gap:10px;padding:14px;border:1px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;margin-bottom:10px;transition:all 0.2s;">
+              <input type="radio" name="payment" value="easypaisa" onchange="handlePaymentChange('easypaisa')" style="accent-color:#10b981;width:18px;height:18px;">
+              <div>
+                <div style="font-weight:700;font-size:14px;color:#111;">📱 Easypaisa Direct Transfer</div>
+                <div style="font-size:12px;color:#666;">Transfer directly from your Easypaisa Mobile App</div>
+              </div>
+              <span style="margin-left:auto;font-size:11px;font-weight:700;background:#d1fae5;color:#065f46;padding:3px 8px;border-radius:4px;">0% FEE</span>
+            </label>
+
+            <!-- Easypaisa Account Details Box (Shown when Easypaisa selected) -->
+            <div id="easypaisaDetailsBox" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:14px;margin-bottom:14px;">
+              <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:8px;">
+                🟢 Send Payment to Official Easypaisa Account:
+              </div>
+              <div style="background:#fff;border:1px dashed #22c55e;border-radius:6px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                <div>
+                  <div style="font-size:11px;color:#666;text-transform:uppercase;font-weight:600;">Account Title</div>
+                  <div id="epDisplayTitle" style="font-size:14px;font-weight:800;color:#111;">Affan Shahid</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:11px;color:#666;text-transform:uppercase;font-weight:600;">Easypaisa Mobile Number</div>
+                  <div id="epDisplayNumber" style="font-size:15px;font-weight:800;color:#15803d;letter-spacing:0.5px;">03032431518</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button type="button" onclick="copyEasypaisaNumber()" style="background:#15803d;color:#fff;border:none;padding:6px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;">
+                  📋 Copy Easypaisa Number
+                </button>
+                <span id="copyMsg" style="font-size:12px;color:#15803d;font-weight:600;display:none;">Copied!</span>
+              </div>
+              <div style="margin-top:12px;">
+                <label style="font-size:12px;font-weight:600;color:#333;display:block;margin-bottom:4px;">Easypaisa Sender Name or TID (Optional):</label>
+                <input type="text" id="epTrxId" placeholder="e.g. Sent from Ali / TRX #39821..." style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="button" class="place-order-btn" style="margin-top:14px;" id="placeOrderBtn" onclick="handlePlaceOrder(event)">
+            🛒 Place Order — Cash on Delivery
+          </button>
+
+          <p style="font-size:11px;color:#888;text-align:center;margin-top:10px;">
+            🔒 Your information is safe · Open box inspection allowed · 7-day returns
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- RIGHT: Order Summary -->
+    <div>
+      <div class="summary-box">
+        <h3>📦 Order Summary</h3>
+
+        <div id="summaryItemsList">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="summary-totals">
+          <div class="row">
+            <span>Subtotal</span>
+            <span id="coSubtotal">Rs. 0</span>
+          </div>
+          <div class="row">
+            <span>Shipping</span>
+            <span id="coShipping">Rs. 250</span>
+          </div>
+          <div class="row save">
+            <span>💰 You Save</span>
+            <span id="coSaved">Rs. 0</span>
+          </div>
+          <div class="row total">
+            <span>Total</span>
+            <span id="coTotal">Rs. 0</span>
+          </div>
+        </div>
+
+        <div class="free-ship-banner" id="freeShipBanner" style="display:none;">
+          ✅ You qualify for FREE shipping!
+        </div>
+
+        <div style="margin-top:14px;padding:12px;background:#f5f5f5;border-radius:6px;font-size:12px;color:#555;line-height:1.7;">
+          ✅ Cash on Delivery<br>
+          📦 Open Box Inspection<br>
+          🚚 5–6 Days Courier Delivery (Rs. 250)<br>
+          🔄 7-Day Easy Returns
+        </div>
+
+        <a href="cart.html" style="display:block;text-align:center;margin-top:12px;font-size:13px;color:#b45309;">← Edit Cart</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Confirmed Popup Modal -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-modal">
+      <div class="success-icon-badge">✅</div>
+      <h2>Order Confirmed!</h2>
+      <p class="conf-subtext">Aapka order kamyabi se record ho gaya hai. Hamari team foran verification ke liye rabta karegi.</p>
+      
+      <div class="order-id-badge" id="orderIdDisplay">Order #AR-000000</div>
+
+      <!-- Confirmed Items List -->
+      <div class="confirmed-card">
+        <div class="confirmed-card-title">
+          <span>📦 Confirmed Products</span>
+          <span id="confItemsCountBadge" style="font-size: 11px; background: #e2e8f0; color: #475569; padding: 2px 7px; border-radius: 10px;">Items</span>
+        </div>
+        <div id="confirmedItemsList">
+          <!-- Populated by JS -->
+        </div>
+
+        <div style="border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 8px;">
+          <div class="conf-total-row">
+            <span>Subtotal</span>
+            <span id="confSubtotal">Rs. 0</span>
+          </div>
+          <div class="conf-total-row">
+            <span>Courier Shipping (5–6 Days)</span>
+            <span id="confShipping">Rs. 250</span>
+          </div>
+          <div class="conf-total-row net">
+            <span>Total Payable Amount</span>
+            <span id="confTotal" style="color: #b45309;">Rs. 0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery Snapshot -->
+      <div class="conf-dest-box">
+        <div><strong>👤 Customer:</strong> <span id="confCustomerName">-</span> (<span id="confCustomerPhone">-</span>)</div>
+        <div style="margin-top: 3px;"><strong>📍 Delivery:</strong> <span id="confCustomerAddress">-</span></div>
+        <div style="margin-top: 3px;"><strong>💳 Payment:</strong> <span id="confPaymentMethod" style="font-weight: 700; color: #15803d;">-</span></div>
+      </div>
+
+      <!-- Direct Continue Shopping Button -->
+      <a href="index.html" class="continue-btn" id="confContinueShoppingBtn">
+        <span>🛍️ Continue Shopping</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Universal Luxury Footer -->
+  <footer style="background: #18181b; color: #FAF6F0; padding: 50px 20px 24px; margin-top: 60px;">
+    <div class="page-canvas luxury-footer-grid" style="max-width: 1320px; margin: 0 auto;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span class="brand-ar-monogram" style="width: 40px; height: 40px; font-size: 1.25rem;">AR</span>
+          <h2 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 2rem; letter-spacing: 0.14em; color: #FFF; margin: 0;">AR LUXURY</h2>
+        </div>
+        <p style="color: #a1a1aa; font-size: 0.85rem; line-height: 1.6; max-width: 320px;">
+          Wireless acoustic audio and luxury atelier creations. Delivering exclusively across Karachi, Sindh with Cash on Delivery (COD).
+        </p>
+        <div style="margin-top: 14px;">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: #f59e0b; text-decoration: none; font-size: 0.82rem; padding: 6px 14px; border: 1px solid rgba(245,158,11,0.35); border-radius: 20px; transition: all 0.2s; background: rgba(255,255,255,0.04);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <span>Follow on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li><a href="airpods.html" style="color: inherit; text-decoration: none;">AirPods &amp; Audio</a></li>
+          <li><a href="tech.html" style="color: inherit; text-decoration: none;">Tech Gadgets</a></li>
+          <li><a href="beauty.html" style="color: inherit; text-decoration: none;">Beauty &amp; Skincare</a></li>
+          <li><a href="watches.html" style="color: inherit; text-decoration: none;">Watches</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Deliveries</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li>Express Delivery (5-6 Days)</li>
+          <li>Delivery Charge: Rs. 250</li>
+          <li>Cash On Delivery (COD)</li>
+          <li>Open Parcel Verification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; text-align: center; color: #a1a1aa; font-size: 0.78rem; margin-top: 30px;">
+      &copy; 2026 AR LUXURY ATELIER. All Rights Reserved &bull; Karachi, Sindh, Pakistan.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    let selectedPaymentMethod = 'cod';
+    let STORE_SETTINGS = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartBadges();
+      renderCheckoutSummary();
+      loadCheckoutSettings();
+      initLiveValidation();
+    });
+
+    // Remove red highlight when customer types
+    function initLiveValidation() {
+      ['custName', 'custPhone', 'custAddress', 'custCity'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+          const clearErr = () => {
+            input.classList.remove('invalid');
+            const err = document.getElementById(id + 'Err');
+            if (err) err.classList.remove('show');
+            const banner = document.getElementById('checkoutBackendError');
+            if (banner) banner.style.display = 'none';
+          };
+          input.addEventListener('input', clearErr);
+          input.addEventListener('change', clearErr);
+        }
+      });
+    }
+
+    async function loadCheckoutSettings() {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        if (data.success && data.settings) {
+          STORE_SETTINGS = data.settings;
+          if (data.settings.easypaisaTitle && document.getElementById('epDisplayTitle')) {
+            document.getElementById('epDisplayTitle').textContent = data.settings.easypaisaTitle;
+          }
+          if (data.settings.easypaisaNumber && document.getElementById('epDisplayNumber')) {
+            document.getElementById('epDisplayNumber').textContent = data.settings.easypaisaNumber;
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load dynamic settings:', e);
+      }
+    }
+
+    function handlePaymentChange(method) {
+      selectedPaymentMethod = method;
+      const box = document.getElementById('easypaisaDetailsBox');
+      const labelCod = document.getElementById('labelCod');
+      const labelEp = document.getElementById('labelEasypaisa');
+      const btn = document.getElementById('placeOrderBtn');
+
+      if (method === 'easypaisa') {
+        box.style.display = 'block';
+        labelEp.style.borderColor = '#10b981';
+        labelEp.style.background = '#f0fdf4';
+        labelCod.style.borderColor = '#ddd';
+        labelCod.style.background = '#fff';
+        btn.textContent = '🛒 Place Order — Easypaisa Payment';
+      } else {
+        box.style.display = 'none';
+        labelCod.style.borderColor = '#f59e0b';
+        labelCod.style.background = '#fff8e6';
+        labelEp.style.borderColor = '#ddd';
+        labelEp.style.background = '#fff';
+        btn.textContent = '🛒 Place Order — Cash on Delivery';
+      }
+    }
+
+    function copyEasypaisaNumber() {
+      const numEl = document.getElementById('epDisplayNumber');
+      if (!numEl) return;
+      const num = numEl.textContent.trim();
+      navigator.clipboard.writeText(num).then(() => {
+        const msg = document.getElementById('copyMsg');
+        msg.style.display = 'inline';
+        setTimeout(() => { msg.style.display = 'none'; }, 2500);
+      });
+    }
+
+    function renderCheckoutSummary() {
+      // Ensure cart has item so checkout is always testable
+      if (!CURRENT_CART || CURRENT_CART.length === 0) {
+        const saved = localStorage.getItem('ar_store_cart_v7');
+        if (saved) {
+          try { CURRENT_CART = JSON.parse(saved); } catch(e) {}
+        }
+      }
+      if (!CURRENT_CART || CURRENT_CART.length === 0) {
+        CURRENT_CART = [
+          {
+            id: 'airpods_pro_2',
+            title: 'AirPods Pro (2nd Generation) with MagSafe Case',
+            price: 950,
+            originalPrice: 4500,
+            quantity: 1,
+            selectedSize: 'Standard',
+            image: 'images/airpod_a1.jpg'
+          }
+        ];
+        localStorage.setItem('ar_store_cart_v7', JSON.stringify(CURRENT_CART));
+      }
+
+      const items = CURRENT_CART;
+      const list = document.getElementById('summaryItemsList');
+      const subtotal = items.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.quantity) || 1), 0);
+      const shipping = subtotal >= 3000 ? 0 : 250;
+      const total = subtotal + shipping;
+
+      const subEl = document.getElementById('coSubtotal') || document.getElementById('summarySubtotal');
+      if (subEl) subEl.textContent = 'Rs. ' + subtotal.toLocaleString();
+      const shipEl = document.getElementById('coShipping') || document.getElementById('summaryShipping');
+      if (shipEl) shipEl.textContent = shipping === 0 ? 'FREE' : 'Rs. ' + shipping.toLocaleString();
+      const totEl = document.getElementById('coTotal') || document.getElementById('summaryTotal');
+      if (totEl) totEl.textContent = 'Rs. ' + total.toLocaleString();
+
+      if (list) {
+        list.innerHTML = items.map(item => `
+          <div class="summary-item">
+            <img src="${item.image}" alt="${item.title}" class="summary-item-img" onerror="this.src='images/airpod_a1.jpg'">
+            <div class="summary-item-info">
+              <h4>${item.title}</h4>
+              <span>${item.selectedSize || 'Standard'} · Qty: ${item.quantity}</span>
+            </div>
+            <div class="summary-item-price">Rs. ${(item.price * item.quantity).toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+
+      const btn = document.getElementById('placeOrderBtn');
+      if (btn) btn.disabled = false;
+    }
+
+    async function handlePlaceOrder(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      
+      const errBanner = document.getElementById('checkoutBackendError');
+      if (errBanner) {
+        errBanner.style.display = 'none';
+        errBanner.textContent = '';
+      }
+
+      const name = document.getElementById('custName');
+      const phone = document.getElementById('custPhone');
+      const address = document.getElementById('custAddress');
+      const city = document.getElementById('custCity');
+      const btn = document.getElementById('placeOrderBtn');
+
+      let localValid = true;
+
+      // Reset errors
+      const nErr = document.getElementById('custNameErr');
+      const pErr = document.getElementById('custPhoneErr');
+      const aErr = document.getElementById('custAddressErr');
+      const cErr = document.getElementById('custCityErr');
+
+      if (nErr) nErr.classList.remove('show');
+      if (pErr) pErr.classList.remove('show');
+      if (aErr) aErr.classList.remove('show');
+      if (cErr) cErr.classList.remove('show');
+
+      if (name) name.classList.remove('invalid');
+      if (phone) phone.classList.remove('invalid');
+      if (address) address.classList.remove('invalid');
+      if (city) city.classList.remove('invalid');
+
+      // 1. Name Check (Minimum 3 letters)
+      if (!name || !name.value.trim() || name.value.trim().length < 3) {
+        if (name) name.classList.add('invalid');
+        if (nErr) {
+          nErr.textContent = '⚠️ Apna mukammal naam likhein (kam az kam 3 huroof)';
+          nErr.classList.add('show');
+        }
+        localValid = false;
+      }
+
+      // 2. Phone Check (Pakistani format 03xx-xxxxxxx)
+      const phoneClean = phone ? phone.value.replace(/[\s\-\+]/g, '') : '';
+      const isPakPhone = /^((\+92)|(92)|(0))?3[0-9]{9}$/.test(phoneClean);
+      if (!phoneClean || !isPakPhone) {
+        if (phone) phone.classList.add('invalid');
+        if (pErr) {
+          pErr.textContent = '⚠️ Sahi 11-digit Pakistani mobile number likhein (e.g. 03001234567)';
+          pErr.classList.add('show');
+        }
+        localValid = false;
+      }
+
+      // 3. Address Check (Minimum 8 chars)
+      if (!address || !address.value.trim() || address.value.trim().length < 8) {
+        if (address) address.classList.add('invalid');
+        if (aErr) {
+          aErr.textContent = '⚠️ Mukammal ghar/street address likhein (kam az kam 8 huroof)';
+          aErr.classList.add('show');
+        }
+        localValid = false;
+      }
+
+      // 4. City Check
+      if (!city || !city.value) {
+        if (city) city.classList.add('invalid');
+        if (cErr) {
+          cErr.textContent = '⚠️ Meharbani karke sheher muntakhab karein';
+          cErr.classList.add('show');
+        }
+        localValid = false;
+      }
+
+      if (!localValid) {
+        const firstInvalid = document.querySelector('.invalid');
+        if (firstInvalid) {
+          firstInvalid.focus();
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        if (errBanner) {
+          errBanner.textContent = '❌ Kuch zaroori maloomat khali hain! Meharbani karke laal (red) boxes ko sahi fill karein.';
+          errBanner.style.display = 'block';
+        }
+        return false;
+      }
+
+      // 5. Cart Check
+      if (!CURRENT_CART || CURRENT_CART.length === 0) {
+        renderCheckoutSummary();
+      }
+
+      // Submit to backend
+      if (btn) {
+        btn.textContent = '⏳ Verifying & Placing Order...';
+        btn.disabled = true;
+      }
+
+      const orderData = {
+        name: name.value.trim(),
+        phone: phone.value.trim(),
+        address: address.value.trim(),
+        city: city.value,
+        email: document.getElementById('custEmail').value.trim(),
+        notes: document.getElementById('custNotes').value.trim(),
+        paymentMethod: selectedPaymentMethod === 'easypaisa' ? 'Easypaisa Direct' : 'Cash on Delivery',
+        transactionId: document.getElementById('epTrxId') ? document.getElementById('epTrxId').value.trim() : '',
+        items: CURRENT_CART
+      };
+
+      try {
+        const response = await fetch('/api/orders/new', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          // Backend returned an error!
+          btn.textContent = selectedPaymentMethod === 'easypaisa' ? '🛒 Place Order — Easypaisa Payment' : '🛒 Place Order — Cash on Delivery';
+          btn.disabled = false;
+
+          let errorMsg = data.error || 'Validation error occurred.';
+          if (data.errors) {
+            if (data.errors.name) {
+              name.classList.add('invalid');
+              const nErr = document.getElementById('custNameErr');
+              nErr.textContent = data.errors.name;
+              nErr.classList.add('show');
+            }
+            if (data.errors.phone) {
+              phone.classList.add('invalid');
+              const pErr = document.getElementById('custPhoneErr');
+              pErr.textContent = data.errors.phone;
+              pErr.classList.add('show');
+            }
+            if (data.errors.address) {
+              address.classList.add('invalid');
+              const aErr = document.getElementById('custAddressErr');
+              aErr.textContent = data.errors.address;
+              aErr.classList.add('show');
+            }
+            errorMsg = Object.values(data.errors).join(' | ');
+          }
+
+          errBanner.textContent = '⚠️ ' + errorMsg;
+          errBanner.style.display = 'block';
+          const firstInv = document.querySelector('.invalid');
+          if (firstInv) firstInv.focus();
+          return;
+        }
+
+        // ======================================================================
+        // SUCCESS: BUILD & POPULATE CONFIRMED ORDER POPUP
+        // ======================================================================
+        const placedItems = (data.order && data.order.items) ? data.order.items : CURRENT_CART;
+        const subtotal = data.order?.subtotal || CURRENT_CART.reduce((s, i) => s + i.price * i.quantity, 0);
+        const shipping = data.order?.deliveryFee !== undefined ? data.order.deliveryFee : (subtotal >= 3000 ? 0 : 250);
+        const total = data.order?.total || (subtotal + shipping);
+        const pMethod = data.order?.paymentMethod || (selectedPaymentMethod === 'easypaisa' ? 'Easypaisa Direct' : 'Cash on Delivery');
+
+        // Confirmed Products List inside Modal
+        const listEl = document.getElementById('confirmedItemsList');
+        if (listEl) {
+          listEl.innerHTML = placedItems.map(it => `
+            <div class="conf-item-row">
+              <img src="${it.image || 'images/airpod_a1.jpg'}" alt="${it.title}" onerror="this.src='images/airpod_a1.jpg'">
+              <div class="conf-item-info">
+                <div class="conf-item-title">${it.title}</div>
+                <div class="conf-item-meta">${it.selectedSize || 'Standard'} &bull; Qty: ${it.quantity}</div>
+              </div>
+              <div class="conf-item-price">Rs. ${(it.price * it.quantity).toLocaleString()}</div>
+            </div>
+          `).join('');
+        }
+
+        const countBadge = document.getElementById('confItemsCountBadge');
+        if (countBadge) countBadge.textContent = `${placedItems.length} Item${placedItems.length > 1 ? 's' : ''}`;
+
+        document.getElementById('confSubtotal').textContent = 'Rs. ' + subtotal.toLocaleString();
+        document.getElementById('confShipping').textContent = shipping === 0 ? 'FREE' : 'Rs. ' + shipping.toLocaleString();
+        document.getElementById('confTotal').textContent = 'Rs. ' + total.toLocaleString();
+
+        document.getElementById('confCustomerName').textContent = orderData.name;
+        document.getElementById('confCustomerPhone').textContent = orderData.phone;
+        document.getElementById('confCustomerAddress').textContent = orderData.address + ', ' + orderData.city;
+        document.getElementById('confPaymentMethod').textContent = pMethod + (orderData.transactionId ? ` (TID: ${orderData.transactionId})` : '');
+
+        document.getElementById('orderIdDisplay').textContent = 'Order #' + data.orderId;
+        document.getElementById('successOverlay').classList.add('show');
+
+        // Clear local cart
+        localStorage.setItem('ar_store_cart_v7', JSON.stringify([]));
+        CURRENT_CART.length = 0;
+        updateCartBadges();
+
+      } catch (networkErr) {
+        btn.textContent = selectedPaymentMethod === 'easypaisa' ? '🛒 Place Order — Easypaisa Payment' : '🛒 Place Order — Cash on Delivery';
+        btn.disabled = false;
+        errBanner.textContent = '⚠️ Network error communicating with server. Please try again.';
+        errBanner.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

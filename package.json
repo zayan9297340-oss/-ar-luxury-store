@@ -1,0 +1,22 @@
+{
+  "name": "ar-luxury-atelier",
+  "version": "1.0.0",
+  "description": "AR LUXURY Fast Fashion & Atelier E-Commerce Store",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "fashion",
+    "luxury",
+    "atelier",
+    "shein"
+  ],
+  "author": "AR LUXURY",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^3.24.4"
+  }
+}

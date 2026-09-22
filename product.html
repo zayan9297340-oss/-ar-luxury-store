@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — AR Store Pakistan</title>
+  <meta name="description" content="View product details, images, and add to cart with Cash on Delivery.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="announce-bar">
+    <span>📦 Free delivery on orders over Rs. 3,000</span>
+    <span>💵 Cash on Delivery — Open Box Inspection Allowed</span>
+    <span>🔥 Same as Amazon — Up to 75% Cheaper</span>
+  </div>
+
+  <header class="site-header">
+    <div class="header-main">
+      <a href="index.html" class="logo-block">
+        <div class="logo-ar">AR</div>
+        <div class="logo-text">
+          <span class="brand-name">AR Store</span>
+          <span class="brand-sub">Global · Direct</span>
+        </div>
+      </a>
+      <div class="header-deliver">
+        <span>Deliver to</span>
+        <strong>📍 Karachi, PK</strong>
+      </div>
+      <div style="flex:1;"></div>
+      <a href="cart.html" class="cart-header-btn" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span style="font-size:14px;font-weight:700;">Cart</span>
+        <span class="cart-count-badge cart-count-display">0</span>
+      </a>
+    </div>
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <a href="index.html" class="nav-link">← Back to Store</a>
+        <a href="airpods.html" class="nav-link">🎧 AirPods</a>
+        <a href="tech.html" class="nav-link">⚡ Tech</a>
+        <a href="beauty.html" class="nav-link">💄 Beauty</a>
+        <a href="watches.html" class="nav-link">⌚ Watches</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="product-detail-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" id="pageBreadcrumb">
+      <a href="index.html">AR Store</a>
+      <span>›</span>
+      <span id="breadCategory">Category</span>
+      <span>›</span>
+      <span id="breadTitle">Product</span>
+    </div>
+
+    <!-- Product Detail Grid -->
+    <div class="product-detail-grid">
+
+      <!-- Images Column -->
+      <div class="product-images-col">
+        <div class="main-product-image">
+          <img src="" alt="Product Image" id="mainProductImg">
+        </div>
+        <div class="thumb-row" id="thumbRow">
+          <!-- Thumbnails inserted by JS -->
+        </div>
+      </div>
+
+      <!-- Info Column -->
+      <div class="product-info-col">
+        <div class="product-brand-tag" id="productBrand">AR Store</div>
+        <h1 class="product-title-d" id="productTitle">Loading...</h1>
+
+        <div class="product-stars-row">
+          <span style="color:#f0a500;font-size:18px;" id="productStars">★★★★★</span>
+          <a href="#" style="color:var(--text-link);font-size:13px;" id="productReviews">0 ratings</a>
+          <span style="margin-left:12px;color:#067d62;font-size:13px;font-weight:600;">In Stock</span>
+        </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:14px;"></div>
+
+        <!-- Price -->
+        <div class="product-price-d" id="priceBlock">
+          <span class="currency">Rs.</span>
+          <span class="price-val" id="productPrice">0</span>
+          <span class="was-price" id="productWas" style="display:none;"></span>
+          <span class="saved-pct" id="productSaving" style="display:none;"></span>
+        </div>
+
+        <!-- Savings vs Amazon -->
+        <div id="amazonCompareBox"
+          style="background:#fff8ee;border:1px solid #f0a500;border-radius:8px;padding:12px;font-size:13px;display:none;">
+          <strong style="color:#cc0c39;">💰 You Save vs Amazon:</strong>
+          <span id="amazonSaving" style="font-weight:700;color:#067d62;margin-left:8px;"></span>
+          <br><span style="color:#888;font-size:11px;margin-top:4px;display:block;">Same quality product — sourced
+            directly, no middleman markup</span>
+        </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:14px;"></div>
+
+        <!-- Size Selector -->
+        <div class="size-selector" id="sizeSelector">
+          <h4 id="sizeLabel">Variant / Size:</h4>
+          <div class="size-btns" id="sizeBtns">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Delivery Box -->
+        <div class="delivery-box">
+          <div class="delivery-row">
+            <strong>Delivers to:</strong>
+            <span>📍 Karachi — 5–6 Days</span>
+          </div>
+          <div class="delivery-row">
+            <strong>Payment:</strong>
+            <span>💵 Cash on Delivery (COD)</span>
+          </div>
+          <div class="delivery-row">
+            <strong>Inspection:</strong>
+            <span>📦 Open Box Before Paying</span>
+          </div>
+          <div class="delivery-row">
+            <strong>Returns:</strong>
+            <span>🔄 7-Day Easy Returns</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <button class="add-to-cart-btn-d" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
+        <button class="buy-it-now-btn" style="margin-top:10px;" onclick="handleBuyNow()">Buy Now</button>
+
+        <div style="border-top:1px solid var(--border);padding-top:14px;"></div>
+
+        <!-- Description -->
+        <div>
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;">About this item</h3>
+          <p class="product-desc-d" id="productDesc">Loading description...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div style="margin-top:32px;">
+      <div class="section-title-row">
+        <h2>You might also like</h2>
+        <a href="index.html" class="see-all-link">See all products →</a>
+      </div>
+      <div class="product-grid" id="relatedGrid" style="margin-top:12px;">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Luxury Footer -->
+  <footer style="background: #18181b; color: #FAF6F0; padding: 50px 20px 24px; margin-top: 60px;">
+    <div class="page-canvas luxury-footer-grid" style="max-width: 1320px; margin: 0 auto;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span class="brand-ar-monogram" style="width: 40px; height: 40px; font-size: 1.25rem;">AR</span>
+          <h2 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 2rem; letter-spacing: 0.14em; color: #FFF; margin: 0;">AR LUXURY</h2>
+        </div>
+        <p style="color: #a1a1aa; font-size: 0.85rem; line-height: 1.6; max-width: 320px;">
+          Wireless acoustic audio and luxury atelier creations. Delivering exclusively across Karachi, Sindh with Cash on Delivery (COD).
+        </p>
+        <div style="margin-top: 14px;">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: #f59e0b; text-decoration: none; font-size: 0.82rem; padding: 6px 14px; border: 1px solid rgba(245,158,11,0.35); border-radius: 20px; transition: all 0.2s; background: rgba(255,255,255,0.04);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <span>Follow on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li><a href="airpods.html" style="color: inherit; text-decoration: none;">AirPods &amp; Audio</a></li>
+          <li><a href="tech.html" style="color: inherit; text-decoration: none;">Tech Gadgets</a></li>
+          <li><a href="beauty.html" style="color: inherit; text-decoration: none;">Beauty &amp; Skincare</a></li>
+          <li><a href="watches.html" style="color: inherit; text-decoration: none;">Watches</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Deliveries</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li>Karachi Express (5-6 Days)</li>
+          <li>Delivery Charge: Rs. 250</li>
+          <li>Cash On Delivery (COD)</li>
+          <li>Open Parcel Verification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; text-align: center; color: #a1a1aa; font-size: 0.78rem; margin-top: 30px;">
+      &copy; 2026 AR LUXURY ATELIER. All Rights Reserved &bull; Karachi, Sindh, Pakistan.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    let ACTIVE_PRODUCT = null;
+    let SELECTED_SIZE = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      updateCartBadges();
+      loadProductPage();
+      if (typeof syncWithBackend === 'function') {
+        await syncWithBackend();
+        loadProductPage();
+      }
+    });
+
+    function loadProductPage() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (!id || !VELOURA_PRODUCTS[id]) {
+        document.getElementById('productTitle').textContent = 'Product not found';
+        return;
+      }
+
+      const p = VELOURA_PRODUCTS[id];
+      ACTIVE_PRODUCT = p;
+      SELECTED_SIZE = p.sizes ? p.sizes[0] : 'Standard';
+
+      // Page title
+      document.title = `${p.title} — AR Store Pakistan`;
+
+      // Breadcrumb
+      document.getElementById('breadCategory').textContent = p.category;
+      document.getElementById('breadTitle').textContent = p.title.slice(0, 40) + (p.title.length > 40 ? '…' : '');
+
+      // Brand
+      document.getElementById('productBrand').textContent = `Visit the AR Store — ${p.category}`;
+
+      // Title
+      document.getElementById('productTitle').textContent = p.title;
+
+      // Stars & Reviews
+      document.getElementById('productStars').textContent = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+      document.getElementById('productReviews').textContent = `${p.reviews.toLocaleString()} ratings`;
+
+      // Price
+      document.getElementById('productPrice').textContent = p.price.toLocaleString();
+      if (p.originalPrice) {
+        const wasEl = document.getElementById('productWas');
+        wasEl.textContent = `Rs. ${p.originalPrice.toLocaleString()}`;
+        wasEl.style.display = 'inline';
+        const saving = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
+        const savEl = document.getElementById('productSaving');
+        savEl.textContent = `-${saving}%`;
+        savEl.style.display = 'inline';
+      }
+
+      // Amazon compare
+      if (p.amazonPrice && p.amazonPrice > p.price) {
+        const box = document.getElementById('amazonCompareBox');
+        box.style.display = 'block';
+        document.getElementById('amazonSaving').textContent =
+          `Rs. ${(p.amazonPrice - p.price).toLocaleString()} (${Math.round((p.amazonPrice - p.price) / p.amazonPrice * 100)}% less than Amazon)`;
+      }
+
+      // Images (main + 3 thumbnails with same image as placeholders)
+      const mainImg = document.getElementById('mainProductImg');
+      mainImg.src = p.image;
+      mainImg.alt = p.title;
+
+      // Thumbnails (use same image for demo — in real scenario use multiple images)
+      const thumbImages = [p.image, p.image, p.image];
+      const thumbRow = document.getElementById('thumbRow');
+      thumbRow.innerHTML = thumbImages.map((src, i) => `
+        <div class="thumb-item ${i === 0 ? 'active' : ''}" onclick="switchThumb(this, '${src}')">
+          <img src="${src}" alt="View ${i + 1}">
+        </div>
+      `).join('');
+
+      // Sizes
+      if (p.sizes && p.sizes.length) {
+        const sizeBtns = document.getElementById('sizeBtns');
+        sizeBtns.innerHTML = p.sizes.map((s, i) => `
+          <button class="size-btn ${i === 0 ? 'active' : ''}" onclick="selectSize(this, '${s}')">${s}</button>
+        `).join('');
+        document.getElementById('sizeLabel').textContent = p.sizes.length === 1 ? 'Variant:' : 'Select Size:';
+      } else {
+        document.getElementById('sizeSelector').style.display = 'none';
+      }
+
+      // Description
+      document.getElementById('productDesc').textContent = p.description;
+
+      // Related products (same section, exclude this product)
+      const related = Object.values(VELOURA_PRODUCTS)
+        .filter(rp => rp.id !== id && (rp.section === p.section || rp.category === p.category))
+        .slice(0, 5);
+
+      const relGrid = document.getElementById('relatedGrid');
+      if (related.length) {
+        relGrid.innerHTML = related.map(rp => renderProductCard(rp, false)).join('');
+      } else {
+        relGrid.innerHTML = Object.values(VELOURA_PRODUCTS).filter(rp => rp.id !== id).slice(0, 5).map(rp => renderProductCard(rp, false)).join('');
+      }
+    }
+
+    function switchThumb(el, src) {
+      document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('mainProductImg').src = src;
+    }
+
+    function selectSize(btn, size) {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      SELECTED_SIZE = size;
+    }
+
+    function handleAddToCart() {
+      if (!ACTIVE_PRODUCT) return;
+      addToCart(ACTIVE_PRODUCT.id, SELECTED_SIZE, true);
+    }
+
+    function handleBuyNow() {
+      if (!ACTIVE_PRODUCT) return;
+      addToCart(ACTIVE_PRODUCT.id, SELECTED_SIZE, false);
+      window.location.href = 'checkout.html';
+    }
+  </script>
+</body>
+
+</html>

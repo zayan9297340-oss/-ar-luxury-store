@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Store — Shop Globally, Pay Locally | Pakistan</title>
+  <meta name="description" content="AR Store Pakistan — AirPods, Tech Gadgets, Beauty & Skincare, Luxury Watches. Cash on Delivery Karachi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Announce Bar -->
+  <div class="announce-bar">
+    <span>📦 Free delivery on orders over Rs. 3,000 in Karachi</span>
+    <span>💵 Cash on Delivery — Open Box Inspection Allowed</span>
+    <a href="#dealsSection">🔥 Deals Live Now →</a>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-main">
+      <a href="index.html" class="logo-block">
+        <div class="logo-ar">AR</div>
+        <div class="logo-text">
+          <span class="brand-name">AR Store</span>
+          <span class="brand-sub">Global · Direct</span>
+        </div>
+      </a>
+      <div class="header-deliver">
+        <span>Deliver to</span>
+        <strong>📍 Karachi, PK</strong>
+      </div>
+      <div class="header-search">
+        <select class="search-cat-select" id="searchCategorySelect" aria-label="Category">
+          <option value="all">All</option>
+          <option value="airpods">AirPods</option>
+          <option value="tech">Tech</option>
+          <option value="beauty">Beauty</option>
+          <option value="watches">Watches</option>
+        </select>
+        <div class="search-input-wrap">
+          <input type="search" class="search-input" id="mainSearchInput" placeholder="Search AirPods, Tech, Beauty, Watches..." autocomplete="off" aria-label="Search">
+          <div class="search-dropdown" id="searchDropdown"></div>
+        </div>
+        <button class="search-btn" id="searchSubmitBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div class="header-account" id="headerAccountBtn" onclick="openAccountModal()" title="Your Account">
+        <span style="font-size:11px;color:#ccc;">Hello, Sign in</span>
+        <strong style="font-size:13px;">Account &amp; Lists</strong>
+      </div>
+      <a href="cart.html" class="cart-header-btn" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span style="font-size:13px;font-weight:700;">Cart</span>
+        <span class="cart-count-badge cart-count-display">0</span>
+      </a>
+    </div>
+
+    <!-- Nav — exactly 4 active categories -->
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <a href="#airpodsSection" class="nav-link">🎧 AirPods &amp; Audio</a>
+        <a href="#techSection"    class="nav-link">⚡ Tech Gadgets</a>
+        <a href="#beautySection"  class="nav-link">💄 Beauty &amp; Skincare</a>
+        <a href="#watchesSection" class="nav-link">⌚ Watches</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main">
+
+    <!-- ══ LIVE SEARCH RESULTS SECTION ══ -->
+    <section class="section-bg section-gap" id="searchResultsSection" style="display:none;">
+      <div class="section-title-row">
+        <div>
+          <span style="color: #b45309; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;" id="searchResultSub">Search Results</span>
+          <h2 style="margin-top: 2px;" id="searchResultTitle">Products Matching Your Search</h2>
+        </div>
+        <button id="clearSearchBtn" class="see-all-link" style="background:none;border:none;color:var(--text-link);font-weight:700;cursor:pointer;font-size:0.95rem;">Clear Search ✕</button>
+      </div>
+      <div class="airpods-showcase-grid" id="searchGrid"></div>
+      <div id="searchNoResults" style="display:none;">
+        <div class="search-no-results-box">
+          <div class="search-no-results-icon">🔍</div>
+          <h3>No Results Found for "<span id="noResultQueryText"></span>"</h3>
+          <p>We couldn't find any products matching your keyword. Please check your spelling or explore our popular categories below:</p>
+          <div class="search-chips-row">
+            <a href="airpods.html" class="search-chip-link">🎧 AirPods &amp; Audio</a>
+            <a href="tech.html" class="search-chip-link">⚡ Tech Gadgets</a>
+            <a href="beauty.html" class="search-chip-link">💄 Beauty &amp; Skincare</a>
+            <a href="watches.html" class="search-chip-link">⌚ Watches</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ALL 4 MAIN CATEGORIES ══ -->
+    <div class="home-grid section-gap" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+      <!-- AirPods & Audio -->
+      <div class="category-block">
+        <h3>AirPods &amp; Audio</h3>
+        <div class="cat-image-grid">
+          <div class="cat-image-item" onclick="window.location.href='airpods.html'"><img src="images/airpod_a1.jpg" alt="AirPods Pro 2"><span>AirPods White</span></div>
+          <div class="cat-image-item" onclick="window.location.href='airpods.html'"><img src="images/airpod_smart_screen.png" alt="Smart Screen TWS"><span>Smart Screen</span></div>
+          <div class="cat-image-item" onclick="window.location.href='airpods.html'"><img src="images/airpod_m19.png" alt="M19 & M10 TWS"><span>M19 Powerbank</span></div>
+          <div class="cat-image-item" onclick="window.location.href='airpods.html'"><img src="images/airpod_air31_clear.png" alt="Air 31 Clear"><span>Air 31 Clear</span></div>
+        </div>
+        <a class="cat-see-more" href="airpods.html">See all AirPods Collection →</a>
+      </div>
+
+      <!-- Tech Gadgets -->
+      <div class="category-block">
+        <h3>Tech Gadgets</h3>
+        <div class="cat-image-grid">
+          <div class="cat-image-item" onclick="window.location.href='tech.html'"><img src="images/tech_tecno_magnetic_case.png" alt="Magnetic Case"><span>Magnetic Case</span></div>
+          <div class="cat-image-item" onclick="window.location.href='tech.html'"><img src="images/tech_sp_gamepad_cooling_fan.png" alt="Gaming Grip"><span>Gaming Grip</span></div>
+          <div class="cat-image-item" onclick="window.location.href='tech.html'"><img src="images/tech_saving_bank_box.png" alt="Saving Box"><span>Saving Box</span></div>
+          <div class="cat-image-item" onclick="window.location.href='tech.html'"><img src="images/tech_cat_lamp_phone_holder.png" alt="LED Lamp Stand"><span>LED Lamp Stand</span></div>
+        </div>
+        <a class="cat-see-more" href="tech.html">See all Tech Collection →</a>
+      </div>
+
+      <!-- Beauty & Skincare -->
+      <div class="category-block">
+        <h3>Beauty &amp; Skincare</h3>
+        <div class="cat-image-grid">
+          <div class="cat-image-item" onclick="window.location.href='beauty.html'"><img src="images/beauty_aloe_vera_gel.png" alt="Aloe Vera"><span>Aloe Vera Gel</span></div>
+          <div class="cat-image-item" onclick="window.location.href='beauty.html'"><img src="images/beauty_ouhoe_whitening_cream.png" alt="Whitening Cream"><span>Whitening Cream</span></div>
+          <div class="cat-image-item" onclick="window.location.href='beauty.html'"><img src="images/beauty_face_slimming_bandage.png" alt="Slimming Belt"><span>V-Line Shaper</span></div>
+          <div class="cat-image-item" onclick="window.location.href='beauty.html'"><img src="images/beauty_uptown_sunscreen_gel.png" alt="Sunscreen"><span>SPF 50 Gel</span></div>
+        </div>
+        <a class="cat-see-more" href="beauty.html">See all Beauty Collection →</a>
+      </div>
+
+      <!-- Luxury Watches -->
+      <div class="category-block">
+        <h3>Luxury Watches</h3>
+        <div class="cat-image-grid">
+          <div class="cat-image-item" onclick="window.location.href='watches.html'"><img src="images/watch_premium_luxury_men.png" alt="Chrono Watch"><span>Chrono Watch</span></div>
+          <div class="cat-image-item" onclick="window.location.href='watches.html'"><img src="images/watch_imported_silicone_square.png" alt="Square Dial"><span>Square Dial</span></div>
+          <div class="cat-image-item" onclick="window.location.href='watches.html'"><img src="images/watch_custom_name_black_chain.png" alt="Custom Name"><span>Custom Black</span></div>
+          <div class="cat-image-item" onclick="window.location.href='watches.html'"><img src="images/watch_arabic_aura_luxury.png" alt="Arabic Aura"><span>Arabic Aura</span></div>
+        </div>
+        <a class="cat-see-more" href="watches.html">See all Watches Collection →</a>
+      </div>
+
+    </div>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip section-gap">
+      <div class="trust-item"><span class="trust-icon">🚚</span><div class="trust-info"><strong>5–6 Days Delivery</strong><span>Express courier Karachi</span></div></div>
+      <div class="trust-item"><span class="trust-icon">💵</span><div class="trust-info"><strong>Cash on Delivery</strong><span>Pay when parcel arrives</span></div></div>
+      <div class="trust-item"><span class="trust-icon">📦</span><div class="trust-info"><strong>Open Box Inspection</strong><span>Check before you pay</span></div></div>
+      <div class="trust-item"><span class="trust-icon">🔄</span><div class="trust-info"><strong>7-Day Returns</strong><span>Easy hassle-free returns</span></div></div>
+    </div>
+
+    <!-- ══ PRODUCT SECTIONS — same names as categories ══ -->
+
+    <section class="section-bg section-gap" id="airpodsSection">
+      <div class="section-title-row">
+        <div>
+          <span style="color: #b45309; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;">Tech Luxury Sound Atelier</span>
+          <h2 style="margin-top: 2px;">AirPods &amp; Wireless Audio Collection</h2>
+        </div>
+        <a href="airpods.html" class="see-all-link" style="color:var(--text-link);font-weight:700;text-decoration:none;">View Full AirPods Page →</a>
+      </div>
+      <div class="airpods-showcase-grid" id="airpodsGrid">
+        <!-- Product 1: Glacier White -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a1')">
+            <span class="badge-tag">Glacier White</span>
+            <img src="images/airpod_a1.jpg" alt="AirPods Pro 2 Glacier White Earbuds">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a1')">AirPods Pro 2 Glacier White Earbuds</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>5.0 (210 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 950</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a1')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Original Smart Screen TWS Airpod -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a2')">
+            <span class="badge-tag">Smart LED Screen</span>
+            <img src="images/airpod_smart_screen.png" alt="Original Smart Screen TWS Airpod">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a2')" title="Original Smart Screen TWS Airpod | Active Noise Cancellation Wireless Earphones | Touch Control LED Display Earbuds for Android & iOS">Original Smart Screen TWS Airpod | Active Noise Cancellation Wireless Earphones | Touch Control LED Display Earbuds for Android &amp; iOS</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (185 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,000</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a2')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Original M19 & M10 & Air31 TWS Air pod -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a3')">
+            <span class="badge-tag">M19 Power Case</span>
+            <img src="images/airpod_m19.png" alt="Original M19 & M10 & Air31 TWS Air pod">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a3')" title="Original M19 & M10 & Air31 TWS Air pod with Super Sound & High Quality Touch Sensors True Stereo Headphones with Built in Mic 10m Transmission Bluetooth Wireless Earbuds, Charging Case Sport Headset for all Bluetooth Smart devices">Original M19 &amp; M10 &amp; Air31 TWS Air pod with Super Sound &amp; High Quality Touch Sensors True Stereo Headphones with Built in Mic 10m Transmission Bluetooth Wireless Earbuds</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (245 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,000</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a3')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: Airbuds Pro 2 - ANC -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a4')">
+            <span class="badge-tag">Airbuds Pro 2 ANC</span>
+            <img src="images/airpod_pro2_anc.png" alt="Airbuds Pro 2 - ANC">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a4')" title="Airbuds Pro 2 - ANC">Airbuds Pro 2 - ANC</h4>
+            <div class="card-stars-row"><span class="gold-star">★★☆☆☆</span><span style="color: #b45309; font-weight: 600;">2.0 (48 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,600</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a4')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: Airbuds TWS Gaming Earbuds Deep Bass ENC -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a5')">
+            <span class="badge-tag">ENC Deep Bass</span>
+            <img src="images/airpod_enc_yellow.png" alt="Airbuds TWS Gaming Earbuds Deep Bass ENC">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a5')" title="Airbuds, Earbuds, Wireless Earbuds, Bluetooth Earbuds, TWS Earbuds, Airbuds Bluetooth Earphones, Wireless Earphones, Touch Control, HD Sound, Deep Bass, ENC Noise Cancellation, Gaming Earbuds, LED Display, Long Battery">Airbuds, Earbuds, Wireless Earbuds, Bluetooth Earbuds, TWS Earbuds, Touch Control HD Sound Deep Bass ENC Noise Cancellation Gaming Earbuds LED Display</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.7 (192 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 800</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a5')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6: Air 31 Transparent TWS Earbuds -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a6')">
+            <span class="badge-tag">Transparent Air 31</span>
+            <img src="images/airpod_air31_clear.png" alt="Air 31 Transparent TWS Earbuds">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a6')" title="Air 31 - Air31 Earbuds Wireless Earbuds - Air 31 Earbuds - Transparent Air 31 - Transparent Earbuds Air 31 TWS Earbuds - Airbuds - Earpods - Ear Buds Wireless - Bluetooth Earphones - Air buds">Air 31 - Air31 Transparent Earbuds Wireless TWS Earbuds LED Display Bluetooth Earphones</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (310 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 900</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a6')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7: Wireless Mini Buds Sports Sound Stereo -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a7')">
+            <span class="badge-tag">Mini Single Earbud</span>
+            <img src="images/airpod_mini_buds.png" alt="Wireless Mini Buds Sports Sound Stereo">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a7')" title="Wireless Mini Buds Sports Sound Stereo for all phone use airpod Headphones & Headsets Wireless Earbuds Handsfree">Wireless Mini Buds Sports Sound Stereo for all phone use airpod Headphones &amp; Headsets Wireless Earbuds Handsfree</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.7 (140 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 850</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a7')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8: Air buds Transparent Air39 Bluetooth Round Drawer TWS -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a8')">
+            <span class="badge-tag">Air39 Drawer TWS</span>
+            <img src="images/airpod_air39_drawer.png" alt="Air buds Transparent Air39 Bluetooth Round Drawer TWS">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a8')" title="Air buds Transparent Air39 Bluetooth Round Drawer TWS Fully Waterproof Earphones Wireless Earbuds ENC Noise Reduction Headsets LED Display Sport Headphones Round Drawer Type Charging Case">Air buds Transparent Air39 Bluetooth Round Drawer TWS Fully Waterproof Earphones Wireless Earbuds ENC Noise Reduction Headsets LED Display</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (215 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,000</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a8')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9: Audionic Airbud Signature S680 Quad Mic -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a9')">
+            <span class="badge-tag">Audionic S680</span>
+            <img src="images/airpod_audionic_s680.png" alt="Audionic Airbud Signature S680 Quad Mic">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a9')" title="Audionic Airbud Signature S680 Quad Mic, ENC Wireless Earbuds, Gaming mode Low Latency TWS Earbud With 40 Hours Playtime, IPx4 Water Proof Wireless Earphones With Voice Assistance">Audionic Airbud Signature S680 Quad Mic, ENC Wireless Earbuds, Gaming mode Low Latency TWS Earbud With 40 Hours Playtime IPx4 Water Proof</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (360 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 4,000</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a9')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10: AUDIONIC Mini Speaker Bluetooth Portable -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a10')">
+            <span class="badge-tag">Audionic 1-Yr Warranty</span>
+            <img src="images/audionic_mini_speaker.png" alt="AUDIONIC Mini Speaker Bluetooth Portable">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a10')" title="AUDIONIC SOLO X5 / SOLO X7 / BOSS 2 / COCO C7 / AKASAKI Mini Speaker Bluetooth Portable Speaker With One Year Official Audionic Warranty">AUDIONIC SOLO X5 / SOLO X7 / BOSS 2 / COCO C7 / AKASAKI Mini Speaker Bluetooth Portable Speaker With One Year Official Audionic Warranty</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (280 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 2,300</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a10')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 11: New M90 with Power Bank -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('a11')">
+            <span class="badge-tag">M90 Power Bank</span>
+            <img src="images/airpod_m90_powerbank.png" alt="New M90 with Power Bank Gaming TWS Earbuds">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('a11')" title="New M90 with Power Bank, Noise Reduction Waterproof, Finger Touch Control Gaming TWS Earbuds">New M90 with Power Bank, Noise Reduction Waterproof, Finger Touch Control Gaming TWS Earbuds</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (295 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,200</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('a11')">Add +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-bg section-gap" id="techSection">
+      <div class="section-title-row">
+        <div>
+          <span style="color: #b45309; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;">Next-Gen Smart Innovation</span>
+          <h2 style="margin-top: 2px;">Tech &amp; Gadgets Collection</h2>
+        </div>
+        <a href="tech.html" class="see-all-link" style="color:var(--text-link);font-weight:700;text-decoration:none;">View Full Tech Page →</a>
+      </div>
+      <div class="airpods-showcase-grid" id="techGrid">
+        <!-- Product 1: Tecno Spark 50 4G Magnetic Case -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg1')">
+            <span class="badge-tag">Magnetic Case</span>
+            <img src="images/tech_tecno_magnetic_case.png" alt="Tecno Spark 50 4G Magnetic Transparent Silicone Case | Clear Shockproof Protective Back Cover">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg1')" title="Tecno Spark 50 4G Magnetic Transparent Silicone Case | Clear Shockproof Protective Back Cover">Tecno Spark 50 4G Magnetic Transparent Silicone Case | Clear Shockproof Protective Back Cover</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (140 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 850</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg1')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: SP+ 2000mAh Power Cooling Fan Gamepad -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg2')">
+            <span class="badge-tag">Cooling Fan 2000mAh</span>
+            <img src="images/tech_sp_gamepad_cooling_fan.png" alt="SP+ 2000mAh Power Cooling Fan Gamepad Joystick Hand Grip Controller for Phone PUBG">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg2')" title="SP+ 2000mAh Power Cooling Fan Gamepad Joystick Hand Grip Controller for Phone PUBG">SP+ 2000mAh Power Cooling Fan Gamepad Joystick Hand Grip Controller for Phone PUBG</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (220 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 2,000</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg2')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Smart Phone Savings Bank for Kids -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg3')">
+            <span class="badge-tag">Target Saving Box</span>
+            <img src="images/tech_saving_bank_box.png" alt="Smart Phone Savings Bank for Kids - Unisex Umrah/Bike/Pen Saving Money Storage">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg3')" title="Smart Phone Savings Bank for Kids - Unisex Umrah/Bike/Pen Saving Money Storage">Smart Phone Savings Bank for Kids - Unisex Umrah/Bike/Pen Saving Money Storage</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.7 (95 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 350</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg3')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: Mobile Phone Holder Cute Lamp -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg4')">
+            <span class="badge-tag">LED Lamp &amp; Holder</span>
+            <img src="images/tech_cat_lamp_phone_holder.png" alt="Mobile Phone Holder Holiday Gifts Dingdang Cat Cute Creative Multi-purpose Eye Care Child Student Home Lighting Supplies Cartoon customized">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg4')" title="Mobile Phone Holder Holiday Gifts Dingdang Cat Cute Creative Multi-purpose Eye Care Child Student Home Lighting Supplies Cartoon customized">Mobile Phone Holder Holiday Gifts Dingdang Cat Cute Creative Multi-purpose Eye Care Child Student Home Lighting Supplies Cartoon customized</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (160 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,300</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg4')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: Techno Spark 6 GO Leather Flip Cover -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg5')">
+            <span class="badge-tag">Leather Wallet Case</span>
+            <img src="images/tech_tecno_leather_flip_case.png" alt="Techno Spark 6 GO Synthetic Leather Flip Cover Case leather book cover with Wallet for techno spark 6 go">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg5')" title="Techno Spark 6 GO Synthetic Leather Flip Cover Case leather book cover with Wallet for techno spark 6 go">Techno Spark 6 GO Synthetic Leather Flip Cover Case leather book cover with Wallet for techno spark 6 go</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (175 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 110</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg5')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6: Redmi 13C Embroidered POLO Back Cover -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg6')">
+            <span class="badge-tag">Polo Embroidered</span>
+            <img src="images/tech_redmi13c_polo_case.png" alt="Redmi 13C Embroidered POLO Back Cover">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg6')" title="Redmi 13C Embroidered POLO Back Cover">Redmi 13C Embroidered POLO Back Cover</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (110 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 700</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg6')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7: Redmi 14C/Poco C75 Matte Case Liquid Silicone Anti-Shock Back Cover -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('tg7')">
+            <span class="badge-tag">Liquid Silicone</span>
+            <img src="images/tech_redmi14c_silicone_case.png" alt="Redmi 14C/Poco C75 Matte Case Liquid Silicone Anti-Shock Back Cover with Camera Protection">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('tg7')" title="Redmi 14C/Poco C75 Matte Case Liquid Silicone Anti-Shock Back Cover with Camera Protection">Redmi 14C/Poco C75 Matte Case Liquid Silicone Anti-Shock Back Cover with Camera Protection</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (135 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 700</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('tg7')">Add +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-bg section-gap" id="beautySection">
+      <div class="section-title-row">
+        <div>
+          <span style="color: #b45309; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;">Luxury Skincare &amp; Organic Glow</span>
+          <h2 style="margin-top: 2px;">Beauty &amp; Skincare Collection</h2>
+        </div>
+        <a href="beauty.html" class="see-all-link" style="color:var(--text-link);font-weight:700;text-decoration:none;">View Full Beauty Page →</a>
+      </div>
+      <div class="airpods-showcase-grid" id="beautyGrid">
+        <!-- Product 1: Pack of 5 Aloe Vera Gel -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg1')">
+            <span class="badge-tag">Pack of 5 Aloe</span>
+            <img src="images/beauty_aloe_vera_pack5.png" alt="Pack of 5 99.9% Naturally & Moisturizing Aloe Vera Gel Face Cleansing Aloe Vera Gel (80ml,120ml,160ml,260ml & 300ml Jar)">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg1')" title="Pack of 5 99.9% Naturally & Moisturizing Aloe Vera Gel Face Cleansing Aloe Vera Gel (80ml,120ml,160ml,260ml & 300ml Jar)">Pack of 5 99.9% Naturally &amp; Moisturizing Aloe Vera Gel Face Cleansing Aloe Vera Gel (80ml,120ml,160ml,260ml &amp; 300ml Jar)</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (260 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 750</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg1')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Chin Cheek Face Slimming Bandage -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg2')">
+            <span class="badge-tag">V-Line Face Lift</span>
+            <img src="images/beauty_face_slimming_bandage.png" alt="New Women Chin Cheek Face Slimming Bandage Lift Up Belt V Line Face Shaper Facial Anti Wrinkle Strap Skin Care Beauty Tools Creek">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg2')" title="New Women Chin Cheek Face Slimming Bandage Lift Up Belt V Line Face Shaper Facial Anti Wrinkle Strap Skin Care Beauty Tools Creek">New Women Chin Cheek Face Slimming Bandage Lift Up Belt V Line Face Shaper Facial Anti Wrinkle Strap Skin Care Beauty Tools Creek</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (310 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 430</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg2')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: 24K Gold Series Skin Polish -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg3')">
+            <span class="badge-tag">24K Gold Polish</span>
+            <img src="images/beauty_24k_gold_polish.png" alt="24K Gold Series Skin Polish Whitening & Brightening Skin Polish for Radiant Glow – Deep Cleansing, Anti-Aging, and Instant Whitening Formula for All Skin Types (120ml + 70g)">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg3')" title="24K Gold Series Skin Polish Whitening & Brightening Skin Polish for Radiant Glow – Deep Cleansing, Anti-Aging, and Instant Whitening Formula for All Skin Types (120ml + 70g)">24K Gold Series Skin Polish Whitening &amp; Brightening Skin Polish for Radiant Glow – Deep Cleansing, Anti-Aging (120ml + 70g)</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (380 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 750</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg3')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: 1Pcs Set Bio Collagen Deep Mask -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg4')">
+            <span class="badge-tag">Bio-Collagen Deep Mask</span>
+            <img src="images/beauty_bio_collagen_mask.png" alt="1Pcs Set Bio Collagen Deep Mask - Biocollagen Hydrating Facial Masks with Collagen, Hyaluronic Acid, and Niacinamide for Firming and Moisturizing Skin">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg4')" title="1Pcs Set Bio Collagen Deep Mask - Biocollagen Hydrating Facial Masks with Collagen, Hyaluronic Acid, and Niacinamide for Firming and Moisturizing Skin">1Pcs Set Bio Collagen Deep Mask - Biocollagen Hydrating Facial Masks with Collagen, Hyaluronic Acid &amp; Niacinamide</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (290 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 430</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg4')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: AVEESSENCE Hand & Feet Glowing Cream -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg5')">
+            <span class="badge-tag">Vitamin C &amp; Retinol</span>
+            <img src="images/beauty_aveessence_hand_feet.png" alt="AVEESSENCE Hand & Feet Glowing Cream | Lightweight & Non-Greasy Formula | Enriched with Vitamin C & Retinol for Deep Hydration, Skin Brightening & Collagen Boost | Improves Elasticity & Nourishes Skin | 30ml">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg5')" title="AVEESSENCE Hand & Feet Glowing Cream | Lightweight & Non-Greasy Formula | Enriched with Vitamin C & Retinol for Deep Hydration, Skin Brightening & Collagen Boost | Improves Elasticity & Nourishes Skin | 30ml">AVEESSENCE Hand &amp; Feet Glowing Cream | Lightweight &amp; Non-Greasy Formula | Enriched with Vitamin C &amp; Retinol | 30ml</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (240 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 270</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg5')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6: Biocos Whitening Body Lotion -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg6')">
+            <span class="badge-tag">Glutathione Complex</span>
+            <img src="images/beauty_biocos_whitening_lotion.png" alt="Biocos Premium Whitening Body Lotion 500ml - Moisturizing, Brightening Formula For Sensitive Skin">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg6')" title="Biocos Premium Whitening Body Lotion 500ml - Moisturizing, Brightening Formula For Sensitive Skin">Biocos Premium Whitening Body Lotion 500ml - Moisturizing, Brightening</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (310 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 1,500</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg6')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7: 10 Pcs Nose Blackhead Remover Strips -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg7')">
+            <span class="badge-tag">10 Pcs Pack</span>
+            <img src="images/beauty_nose_blackhead_strips.png" alt="10 Pcs Nose Blackhead Remover Strips – Deep Cleansing Mask">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg7')" title="10 Pcs Nose Blackhead Remover Strips – Deep Cleansing Mask for Effective Blackhead Removal, Pore Unclogging, and Skin Refining – Gentle and Easy to Use for All Skin Types">10 Pcs Nose Blackhead Remover Strips – Deep Cleansing Mask</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (420 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 200</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg7')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8: 7 Day Beauty Skin White Cream 450 Gm -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg8')">
+            <span class="badge-tag">7 Day Formula</span>
+            <img src="images/beauty_skin_white_7day_cream.png" alt="7 Day Beauty Skin White Cream 450 Gm">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg8')" title="7 Day Beauty Skin White Cream 450 Gm">7 Day Beauty Skin White Cream 450 Gm</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.7 (260 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 700</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg8')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9: Parachute 100% Pure Coconut Oil 100ml -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg9')">
+            <span class="badge-tag">100% Pure Virgin</span>
+            <img src="images/beauty_parachute_coconut_oil.png" alt="Parachute 100% Pure Coconut Oil 100ml, Hair Treatment Nourishing">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg9')" title="Parachute 100% Pure Coconut Oil 100ml, Hair Treatment Nourishing, Multi-Use, Natural Moisturizer, Hair and Skin Care, Rich in Vitamins, Hydrating, Trustworthy Brand">Parachute 100% Pure Coconut Oil 100ml - Hair &amp; Skin Care</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (380 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 500</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg9')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10: BIOAQUA Vitamin C Face Sheet Mask -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('bg10')">
+            <span class="badge-tag">Vitamin C Glow</span>
+            <img src="images/beauty_bioaqua_vitaminc_mask.png" alt="BIOAQUA Vitamin C Face Sheet Mask for Dark Spots, Dull Skin & Brightening">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('bg10')" title="BIOAQUA Vitamin C Face Sheet Mask for Dark Spots, Dull Skin & Brightening - Antioxidant">BIOAQUA Vitamin C Face Sheet Mask - Brightening &amp; Glow</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (490 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 200</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('bg10')">Add +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-bg section-gap" id="watchesSection">
+      <div class="section-title-row">
+        <div>
+          <span style="color: #b45309; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;">Luxury Timepieces &amp; Precision</span>
+          <h2 style="margin-top: 2px;">Luxury Watches Collection</h2>
+        </div>
+        <a href="watches.html" class="see-all-link" style="color:var(--text-link);font-weight:700;text-decoration:none;">View Full Watches Page →</a>
+      </div>
+      <div class="airpods-showcase-grid" id="watchesGrid">
+        <!-- Product 1: Premium Quality Watch for Men -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('wt1')">
+            <span class="badge-tag">Luxury Chrono Style</span>
+            <img src="images/watch_premium_luxury_men.png" alt="Premium Quality Watch for Men Stylish Watch for Boys Luxury Watch for Gents Best Watch for Gift">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('wt1')" title="Premium Quality Watch for Men Stylish Watch for Boys Luxury Watch for Gents Best Watch for Gift">Premium Quality Watch for Men Stylish Watch for Boys Luxury Watch for Gents</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (290 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 950</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('wt1')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Branded Imported Watch for men and boys -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('wt2')">
+            <span class="badge-tag">New Design 2022</span>
+            <img src="images/watch_imported_silicone_square.png" alt="Branded Imported Watch for men and boys latest new design 2022">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('wt2')" title="Branded Imported Watch for men and boys latest new design 2022">Branded Imported Watch for Men and Boys Latest Design 2022</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (180 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 850</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('wt2')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Customized Name Luxury Black Chain Watch -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('wt3')">
+            <span class="badge-tag">Custom Name Edition</span>
+            <img src="images/watch_custom_name_black_chain.png" alt="Customized Name Luxury Black Chain Watch For Mens /Boys - Stylish Watch Latest Fashion watch">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('wt3')" title="Customized Name Luxury Black Chain Watch For Mens /Boys - Stylish Watch Latest Fashion watch">Customized Name Luxury Black Chain Watch For Mens /Boys</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (340 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 750</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('wt3')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: Analog Watch for Men and Boys Stainless Steel Quartz Watch -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('wt4')">
+            <span class="badge-tag">Dual-Tone Stainless Steel</span>
+            <img src="images/watch_analog_quartz_black_silver.png" alt="Analog Watch for Men and Boys Stainless Steel Quartz Watch Classic and Fashion Style Multiple Colors">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('wt4')" title="Analog Watch for Men and Boys Stainless Steel Quartz Watch Classic and Fashion Style Multiple Colors">Analog Watch for Men and Boys Stainless Steel Quartz Watch</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (210 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 750</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('wt4')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: Arabic Aura Watch For Men -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('wt5')">
+            <span class="badge-tag">Arabic Dial Aura</span>
+            <img src="images/watch_arabic_aura_luxury.png" alt="Black-Gold-Silver-White Arabic Aura Watch For Men Stylish Aura Watch 100% Original Watch Amazing Smart Watch">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('wt5')" title="Black-Gold-Silver-White Arabic Aura Watch For Men Stylish Aura Watch 100% Original Watch Amazing Smart Watch">Arabic Aura Watch For Men - Black Gold Silver White Original</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (450 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div><span class="price-in-pkr">Rs. 550</span></div>
+              <button class="btn-card-add-quick" onclick="addToCart('wt5')">Add +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  </main>
+
+  <!-- Universal Luxury Footer -->
+  <footer style="background: #18181b; color: #FAF6F0; padding: 50px 20px 24px; margin-top: 60px;">
+    <div class="page-canvas luxury-footer-grid" style="max-width: 1320px; margin: 0 auto;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span class="brand-ar-monogram" style="width: 40px; height: 40px; font-size: 1.25rem;">AR</span>
+          <h2 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 2rem; letter-spacing: 0.14em; color: #FFF; margin: 0;">AR LUXURY</h2>
+        </div>
+        <p style="color: #a1a1aa; font-size: 0.85rem; line-height: 1.6; max-width: 320px;">
+          Wireless acoustic audio and luxury atelier creations. Delivering exclusively across Karachi, Sindh with Cash on Delivery (COD).
+        </p>
+        <div style="margin-top: 14px;">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: #f59e0b; text-decoration: none; font-size: 0.82rem; padding: 6px 14px; border: 1px solid rgba(245,158,11,0.35); border-radius: 20px; transition: all 0.2s; background: rgba(255,255,255,0.04);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <span>Follow on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li><a href="airpods.html" style="color: inherit; text-decoration: none;">AirPods &amp; Audio</a></li>
+          <li><a href="tech.html" style="color: inherit; text-decoration: none;">Tech Gadgets</a></li>
+          <li><a href="beauty.html" style="color: inherit; text-decoration: none;">Beauty &amp; Skincare</a></li>
+          <li><a href="watches.html" style="color: inherit; text-decoration: none;">Watches</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family: 'Outfit', 'Inter', sans-serif; font-size: 1.2rem; color: #f59e0b; margin-bottom: 14px;">Deliveries</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #cbd5e1; padding: 0; margin: 0;">
+          <li>Express Delivery (5-6 Days)</li>
+          <li>Delivery Charge: Rs. 250</li>
+          <li>Cash On Delivery (COD)</li>
+          <li>Open Parcel Verification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; text-align: center; color: #a1a1aa; font-size: 0.78rem; margin-top: 30px;">
+      &copy; 2026 AR LUXURY ATELIER. All Rights Reserved &bull; Karachi, Sindh, Pakistan.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    function scrollTo(id) {
+      document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    }
+
+    /* Countdown Timer */
+    (function() {
+      let secs = 3 * 3600 + 47 * 60 + 22;
+      function tick() {
+        if (secs <= 0) return; secs--;
+        const h = String(Math.floor(secs / 3600)).padStart(2,'0');
+        const m = String(Math.floor((secs % 3600) / 60)).padStart(2,'0');
+        const s = String(secs % 60).padStart(2,'0');
+        const hEl = document.getElementById('timerHH');
+        const mEl = document.getElementById('timerMM');
+        const sEl = document.getElementById('timerSS');
+        if(hEl) hEl.textContent = h;
+        if(mEl) mEl.textContent = m;
+        if(sEl) sEl.textContent = s;
+      }
+      setInterval(tick, 1000);
+    })();
+
+    /* Header Search & Live Filter */
+    (function() {
+      const input = document.getElementById('mainSearchInput');
+      const catSelect = document.getElementById('searchCategorySelect');
+      const dropdown = document.getElementById('searchDropdown');
+      const submitBtn = document.getElementById('searchSubmitBtn');
+      const resultsSection = document.getElementById('searchResultsSection');
+      const searchGrid = document.getElementById('searchGrid');
+      const noResultsBox = document.getElementById('searchNoResults');
+      const titleEl = document.getElementById('searchResultTitle');
+      const subEl = document.getElementById('searchResultSub');
+      const clearBtn = document.getElementById('clearSearchBtn');
+
+      function filterProducts(q, cat) {
+        const pool = window.VELOURA_PRODUCTS || (typeof VELOURA_PRODUCTS !== 'undefined' ? VELOURA_PRODUCTS : null);
+        if (!pool) return [];
+        const prods = Object.values(pool);
+        const lower = (q || '').toLowerCase().trim();
+        const words = lower.split(/\s+/).filter(Boolean);
+
+        return prods.filter(p => {
+          // Category filter
+          if (cat && cat !== 'all') {
+            const sec = (p.section || '').toLowerCase();
+            const pcat = (p.category || '').toLowerCase();
+            if (cat === 'airpods' && !sec.includes('airpod') && !pcat.includes('airpod')) return false;
+            if (cat === 'tech' && !sec.includes('tech') && !pcat.includes('tech') && !pcat.includes('gadget')) return false;
+            if (cat === 'beauty' && !sec.includes('beauty') && !pcat.includes('beauty') && !pcat.includes('skin')) return false;
+            if (cat === 'watches' && !sec.includes('watch') && !pcat.includes('watch')) return false;
+          }
+          if (!words.length) return true;
+
+          const searchTarget = [
+            p.title || '',
+            p.category || '',
+            p.badge || '',
+            p.description || '',
+            ...(p.keywords || [])
+          ].join(' ').toLowerCase();
+
+          return words.every(w => searchTarget.includes(w));
+        });
+      }
+
+      function executeSearch(query) {
+        if (dropdown) dropdown.classList.remove('open');
+        const cat = catSelect ? catSelect.value : 'all';
+        const q = (query !== undefined ? query : (input ? input.value : '')).trim();
+        
+        if (!q && cat === 'all') {
+          if (resultsSection) resultsSection.style.display = 'none';
+          return;
+        }
+
+        const matches = filterProducts(q, cat);
+        if (resultsSection) {
+          resultsSection.style.display = 'block';
+          if (matches.length > 0) {
+            if (noResultsBox) noResultsBox.style.display = 'none';
+            if (searchGrid) {
+              searchGrid.style.display = 'grid';
+              searchGrid.innerHTML = matches.map(renderAirpodsShowcaseCard).join('');
+            }
+            if (titleEl) titleEl.textContent = `Search Results for "${q || cat.toUpperCase()}" (${matches.length} found)`;
+            if (subEl) subEl.textContent = `Filtered in: ${cat.toUpperCase()}`;
+          } else {
+            if (searchGrid) {
+              searchGrid.style.display = 'none';
+              searchGrid.innerHTML = '';
+            }
+            if (noResultsBox) noResultsBox.style.display = 'block';
+            const querySpan = document.getElementById('noResultQueryText');
+            if (querySpan) querySpan.textContent = q || cat;
+            if (titleEl) titleEl.textContent = 'No Results Found';
+            if (subEl) subEl.textContent = `Filtered in: ${cat.toUpperCase()}`;
+          }
+          resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function renderLiveDropdown(q) {
+        if (!input || !dropdown) return;
+        const cat = catSelect ? catSelect.value : 'all';
+        if (!q && cat === 'all') {
+          dropdown.classList.remove('open');
+          return;
+        }
+        const matches = filterProducts(q, cat).slice(0, 8);
+        if (!matches.length) {
+          dropdown.innerHTML = `
+            <div class="search-dropdown-empty">
+              No direct matches for "<strong>${q}</strong>".<br>
+              <span style="font-size:12px;color:#f59e0b;font-weight:600;display:inline-block;margin-top:6px;cursor:pointer;" onclick="window.searchAppExecute()">Click here or press Enter to search &rarr;</span>
+            </div>
+          `;
+          dropdown.classList.add('open');
+          return;
+        }
+        dropdown.innerHTML = matches.map(p => `
+          <div class="search-item-row" onclick="window.location.href='card.html?id=${p.id}'">
+            <img src="${p.image}" alt="${p.title}">
+            <div class="search-item-info">
+              <div class="search-item-title">${p.title}</div>
+              <div class="search-item-meta">
+                <span class="search-item-price">Rs. ${p.price.toLocaleString()}</span>
+                <span>• ${p.category}</span>
+              </div>
+            </div>
+          </div>
+        `).join('') + `
+          <div class="search-dropdown-view-all" onclick="window.searchAppExecute()">
+            View all ${filterProducts(q, cat).length} results for "${q || cat}" &rarr;
+          </div>
+        `;
+        dropdown.classList.add('open');
+      }
+
+      window.searchAppExecute = () => executeSearch();
+
+      if (input) {
+        input.addEventListener('input', e => renderLiveDropdown(e.target.value.trim()));
+        input.addEventListener('focus', () => { if (input.value.trim()) renderLiveDropdown(input.value.trim()); });
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            executeSearch();
+          }
+        });
+      }
+
+      if (catSelect) {
+        catSelect.addEventListener('change', () => {
+          if (input && input.value.trim()) {
+            renderLiveDropdown(input.value.trim());
+          }
+        });
+      }
+
+      if (submitBtn) {
+        submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          executeSearch();
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          if (input) input.value = '';
+          if (catSelect) catSelect.value = 'all';
+          if (resultsSection) resultsSection.style.display = 'none';
+        });
+      }
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.header-search')) {
+          if (dropdown) dropdown.classList.remove('open');
+        }
+      });
+
+      // Check URL query parameters ?search=... or ?q=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const qParam = urlParams.get('search') || urlParams.get('q');
+      const catParam = urlParams.get('cat');
+      if (qParam || catParam) {
+        if (input && qParam) input.value = qParam;
+        if (catSelect && catParam) catSelect.value = catParam;
+        setTimeout(() => executeSearch(qParam || ''), 150);
+      }
+    })();
+  </script>
+  <!-- Quick View Modal -->
+  <div id="quickViewModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; width: 100%; max-width: 680px; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); position: relative; display: flex; flex-direction: column; max-height: 90vh;">
+      <button onclick="closeQuickView()" style="position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: #f4f4f5; color: #18181b; font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 10; cursor: pointer; border: none; transition: background 0.2s;">&times;</button>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 24px; overflow-y: auto;">
+        <div style="display: flex; align-items: center; justify-content: center; background: #fafafa; border-radius: 12px; padding: 14px; border: 1px solid #f4f4f5; min-height: 220px;">
+          <img id="qvModalImg" src="" alt="Airpod Preview" style="width: auto; max-width: 90%; max-height: 220px; object-fit: contain;">
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <span id="qvModalBadge" style="display: inline-block; align-self: flex-start; background: #18181b; color: #fbbf24; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;">Badge</span>
+          <h3 id="qvModalTitle" style="font-size: 1.15rem; color: #18181b; font-weight: 700; line-height: 1.4; margin-bottom: 8px;">Product Title</h3>
+          <div id="qvModalStars" style="margin-bottom: 12px; font-size: 13px; color: #71717a;">★★★★★ 5.0 (200 ratings)</div>
+          <div style="margin-bottom: 14px;">
+            <span style="font-size: 1.5rem; font-weight: 800; color: #dc2626;" id="qvModalPrice">Rs. 1,000</span>
+            <span style="font-size: 0.85rem; color: #71717a; text-decoration: line-through; margin-left: 8px;" id="qvModalWas">Rs. 2,500</span>
+          </div>
+          <p id="qvModalDesc" style="font-size: 0.82rem; color: #52525b; line-height: 1.5; margin-bottom: 18px; max-height: 100px; overflow-y: auto;"></p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="qvAddBtn" class="btn-card-add-quick" style="flex: 1; padding: 10px 16px; font-size: 14px;">Add to Bag +</button>
+            <a id="qvDetailsLink" href="#" style="padding: 10px 16px; border: 1px solid #e4e4e7; border-radius: 8px; color: #18181b; font-weight: 600; font-size: 13px; text-decoration: none; text-align: center; display: inline-flex; align-items: center; justify-content: center; background: #f8fafc;">View Full Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
