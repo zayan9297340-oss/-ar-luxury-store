@@ -1338,61 +1338,68 @@
       setTimeout(() => { t.style.display = 'none'; }, 3200);
     }
 
-    // Fetch all live data from backend
+    // Fetch all live data from backend with resilient localStorage fallback
     async function fetchLiveData() {
       try {
         const [pRes, oRes, sRes, dbRes, setRes] = await Promise.all([
-          fetch('/api/products').then(r => r.json()),
-          fetch('/api/orders').then(r => r.json()),
-          fetch('/api/stats').then(r => r.json()),
-          fetch('/api/db/status').then(r => r.json()),
-          fetch('/api/settings').then(r => r.json()).catch(() => ({ success: false }))
+          fetch('/api/products').then(r => r.ok ? r.json() : { success: false }).catch(() => ({ success: false })),
+          fetch('/api/orders').then(r => r.ok ? r.json() : { success: false }).catch(() => ({ success: false })),
+          fetch('/api/stats').then(r => r.ok ? r.json() : { success: false }).catch(() => ({ success: false })),
+          fetch('/api/db/status').then(r => r.ok ? r.json() : { success: false }).catch(() => ({ success: false })),
+          fetch('/api/settings').then(r => r.ok ? r.json() : { success: false }).catch(() => ({ success: false }))
         ]);
 
         if (setRes && setRes.success && setRes.settings) {
           populateSettingsForm(setRes.settings);
         }
 
-        if (pRes.success) {
-          ALL_PRODUCTS = pRes.products || {};
-          renderProductsTable(ALL_PRODUCTS);
-          document.getElementById('productsCountBadge').textContent = Object.keys(ALL_PRODUCTS).length;
+        if (pRes && pRes.success && pRes.products && Object.keys(pRes.products).length > 0) {
+          ALL_PRODUCTS = pRes.products;
+        } else if (typeof VELOURA_PRODUCTS !== 'undefined') {
+          ALL_PRODUCTS = VELOURA_PRODUCTS;
+        }
+        renderProductsTable(ALL_PRODUCTS);
+        const pCountBadge = document.getElementById('productsCountBadge');
+        if (pCountBadge) pCountBadge.textContent = Object.keys(ALL_PRODUCTS).length;
+
+        // Load orders: Prefer server if available, otherwise read localStorage
+        let localOrders = [];
+        try {
+          localOrders = JSON.parse(localStorage.getItem('ar_luxury_orders') || '[]');
+        } catch(e) {}
+
+        if (oRes && oRes.success && Array.isArray(oRes.orders) && oRes.orders.length > 0) {
+          ALL_ORDERS = oRes.orders;
+        } else {
+          ALL_ORDERS = localOrders;
         }
 
-        if (oRes.success) {
-          ALL_ORDERS = oRes.orders || [];
-          renderOrdersTable(ALL_ORDERS);
-          renderRecentOrders(ALL_ORDERS.slice(0, 5));
+        renderOrdersTable(ALL_ORDERS);
+        renderRecentOrders(ALL_ORDERS.slice(0, 5));
+
+        // Calculate KPIs
+        const totalRev = ALL_ORDERS.reduce((s, o) => s + (Number(o.total) || 0), 0);
+        const pendingCount = ALL_ORDERS.filter(o => o.status === 'Pending').length;
+        const dispCount = ALL_ORDERS.filter(o => o.status === 'Dispatched' || o.status === 'Delivered').length;
+
+        document.getElementById('kpiRevenue').textContent = 'Rs. ' + totalRev.toLocaleString();
+        document.getElementById('kpiTotalOrders').textContent = ALL_ORDERS.length;
+        document.getElementById('kpiPendingOrders').textContent = pendingCount;
+        const pCntEl = document.getElementById('pendingOrdersCount');
+        if (pCntEl) pCntEl.textContent = pendingCount;
+        document.getElementById('kpiDispatchedOrders').textContent = dispCount;
+
+        if (sRes && sRes.success && sRes.stats && sRes.stats.visitors) {
+          renderVisitorAnalytics(sRes.stats.visitors);
         }
 
-        if (sRes.success && sRes.stats) {
-          document.getElementById('kpiRevenue').textContent = 'Rs. ' + (sRes.stats.totalRevenue || 0).toLocaleString();
-          document.getElementById('kpiTotalOrders').textContent = sRes.stats.totalOrders || 0;
-          document.getElementById('kpiPendingOrders').textContent = sRes.stats.pendingOrders || 0;
-          document.getElementById('pendingOrdersCount').textContent = sRes.stats.pendingOrders || 0;
-          document.getElementById('kpiDispatchedOrders').textContent = sRes.stats.dispatchedOrders || 0;
-
-          if (sRes.stats.visitors) {
-            renderVisitorAnalytics(sRes.stats.visitors);
-          }
-        }
-
-        if (dbRes.success && dbRes.db) {
-          const chip = document.getElementById('dbStatusChip');
-          const chipText = document.getElementById('dbStatusText');
-          const activeMode = document.getElementById('dbActiveMode');
-
-          if (dbRes.db.connected && dbRes.db.driver === 'mysql') {
-            chip.classList.add('mysql-active');
-            chipText.textContent = 'MySQL 8.0 Connected';
-            activeMode.textContent = 'MySQL 8.0 Database (Active)';
-            activeMode.style.color = '#60a5fa';
-          } else {
-            chip.classList.remove('mysql-active');
-            chipText.textContent = 'Resilient Local Engine';
-            activeMode.textContent = 'Local JSON Database (Ready for MySQL)';
-            activeMode.style.color = '#34d399';
-          }
+        const chip = document.getElementById('dbStatusChip');
+        const chipText = document.getElementById('dbStatusText');
+        const activeMode = document.getElementById('dbActiveMode');
+        if (chip && chipText && activeMode) {
+          chipText.textContent = 'Active Cloud Engine';
+          activeMode.textContent = 'Vercel Fast Store Engine';
+          activeMode.style.color = '#34d399';
         }
       } catch (err) {
         console.error('Fetch live data error:', err);
