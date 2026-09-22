@@ -810,6 +810,12 @@
       const localOrderObj = {
         id: genOrderId,
         orderId: genOrderId,
+        customer: {
+          name: orderData.name,
+          phone: orderData.phone,
+          address: orderData.address,
+          city: orderData.city
+        },
         customerName: orderData.name,
         name: orderData.name,
         phone: orderData.phone,
@@ -832,6 +838,12 @@
         const storedOrders = JSON.parse(localStorage.getItem('ar_luxury_orders') || '[]');
         storedOrders.unshift(localOrderObj);
         localStorage.setItem('ar_luxury_orders', JSON.stringify(storedOrders));
+        
+        // Broadcast to any open Admin Panel tabs immediately
+        if (typeof BroadcastChannel !== 'undefined') {
+          const bc = new BroadcastChannel('ar_orders_channel');
+          bc.postMessage({ type: 'NEW_ORDER', order: localOrderObj });
+        }
       } catch (e) {
         console.warn('LocalStorage save error:', e);
       }
@@ -897,6 +909,33 @@
           `Assalam o Alaikum, Please mera order confirm kar dein.`
         );
         waBtn.href = `https://wa.me/923299297340?text=${waText}`;
+
+        // Auto-open WhatsApp after 1 second for instant customer delivery
+        setTimeout(() => {
+          try { window.open(waBtn.href, '_blank'); } catch(e) {}
+        }, 1200);
+      }
+
+      // Sync with Central Cloud Database (Google Sheets Webhook) if configured
+      const cloudUrl = localStorage.getItem('ar_cloud_sheet_url') || 'https://script.google.com/macros/s/AKfycbz_placeholder/exec';
+      if (cloudUrl && !cloudUrl.includes('placeholder')) {
+        try {
+          fetch(cloudUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: genOrderId,
+              name: orderData.name,
+              phone: orderData.phone,
+              address: orderData.address + ', ' + orderData.city,
+              items: placedItems.map(it => `${it.title} (x${it.quantity})`).join(', '),
+              total: 'Rs. ' + totalVal.toLocaleString(),
+              paymentMethod: pMethod,
+              date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
+            })
+          }).catch(() => {});
+        } catch (e) {}
       }
 
       document.getElementById('successOverlay').classList.add('show');
