@@ -688,6 +688,37 @@
         max-width: 400px !important;
       }
     }
+
+    /* ─── Mobile Responsiveness for Print Slip Modal ─── */
+    @media (max-width: 680px) {
+      .modal-box {
+        width: 96% !important;
+        margin: 8px auto !important;
+        max-height: 94vh !important;
+        border-radius: 12px !important;
+      }
+      #printableSlip {
+        padding: 12px 8px !important;
+      }
+      .slip-grid-box {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .slip-header-box {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .slip-header-box > div:last-child {
+        text-align: left !important;
+      }
+      #printableSlip table {
+        font-size: 11px !important;
+      }
+      #printableSlip table th, #printableSlip table td {
+        padding: 7px 6px !important;
+      }
+    }
+
     /* ─── Print Styles for Courier Dispatch Slip ─── */
     @media print {
       body * {
@@ -918,6 +949,7 @@
             <h2 class="section-title">Order Fulfillment &amp; COD Pipeline</h2>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Update order statuses, view items, print shipping labels, and contact customers via WhatsApp.</p>
           </div>
+          <button class="btn-amazon" onclick="openAddOrderModal()">➕ Add / WhatsApp Order</button>
         </div>
 
         <div class="card-table-wrap">
@@ -1321,6 +1353,81 @@
         <div class="modal-footer">
           <button type="button" class="btn-ghost" onclick="closeProductModal()">Cancel</button>
           <button type="submit" class="btn-amazon" id="saveProdBtn">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD MANUAL / WHATSAPP ORDER MODAL -->
+  <div id="addOrderModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3>➕ Add Customer Order (Manual / WhatsApp)</h3>
+        <button onclick="closeAddOrderModal()" style="background: none; border: none; color: #9ca3af; font-size: 22px; cursor: pointer;">&times;</button>
+      </div>
+      <form id="addOrderForm" onsubmit="handleManualOrderSubmit(event)">
+        <div class="modal-body">
+          <div style="background: rgba(245, 158, 11, 0.1); border: 1px dashed #f59e0b; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 12px; color: #fbbf24;">
+            💡 <strong>WhatsApp / Direct Call Order:</strong> Customer ka phone, mukammal address aur product select karein, foran slip generate ho jayegi!
+          </div>
+
+          <div class="form-group">
+            <label>Customer Name *</label>
+            <input type="text" id="manualCustName" class="form-control" required placeholder="e.g. Affan Shahid">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" id="manualCustPhone" class="form-control" required placeholder="e.g. 03001234567">
+            </div>
+            <div class="form-group">
+              <label>City *</label>
+              <input type="text" id="manualCustCity" class="form-control" value="Karachi" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Delivery Address *</label>
+            <input type="text" id="manualCustAddress" class="form-control" required placeholder="Ghar / Flat #, Gali, Area / Block">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Select Product *</label>
+              <select id="manualOrderProduct" class="form-control" required onchange="handleManualProductChange()">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Quantity *</label>
+              <input type="number" id="manualOrderQty" class="form-control" value="1" min="1" required onchange="calcManualTotal()">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Total COD Amount (Rs.) *</label>
+              <input type="number" id="manualOrderTotal" class="form-control" required placeholder="1450">
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select id="manualOrderMethod" class="form-control">
+                <option value="Cash On Delivery (COD)">Cash On Delivery (COD)</option>
+                <option value="Easypaisa Direct">Easypaisa Direct</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Notes / Instructions (Optional)</label>
+            <input type="text" id="manualCustNotes" class="form-control" placeholder="e.g. Shaam 5 baje ke baad delivery karein">
+          </div>
+        </div>
+
+        <div style="padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px;">
+          <button type="button" class="btn-ghost" onclick="closeAddOrderModal()">Cancel</button>
+          <button type="submit" class="btn-amazon">💾 Save &amp; Generate Slip</button>
         </div>
       </form>
     </div>
@@ -1996,7 +2103,7 @@
       slip.innerHTML = `
         <div style="border: 2px solid #0f172a; padding: 22px; border-radius: 12px; background: #ffffff; color: #0f172a; font-family: 'Inter', -apple-system, sans-serif;">
           <!-- Slip Header -->
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 14px; margin-bottom: 16px;">
+          <div class="slip-header-box" style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 14px; margin-bottom: 16px;">
             <div>
               <h2 style="margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 0.05em; color: #0f172a;">AR LUXURY ATELIER</h2>
               <div style="font-size: 12px; font-weight: 800; color: #b45309; text-transform: uppercase; margin-top: 3px; letter-spacing: 0.5px;">⚡ Express Courier Dispatch Slip &bull; Karachi</div>
@@ -2010,7 +2117,7 @@
           </div>
 
           <!-- Customer & Payment Details Grid -->
-          <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 18px;">
+          <div class="slip-grid-box" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 18px;">
             <!-- Customer Box -->
             <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px;">
               <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #475569; letter-spacing: 0.5px;">📦 DELIVER TO (CUSTOMER):</div>
@@ -2098,6 +2205,108 @@
 
     function closePrintModal() {
       document.getElementById('printModal').classList.remove('open');
+    }
+
+    // Manual / WhatsApp Order Handlers
+    function openAddOrderModal() {
+      const select = document.getElementById('manualOrderProduct');
+      if (select) {
+        const prodPool = (typeof VELOURA_PRODUCTS !== 'undefined' ? VELOURA_PRODUCTS : {}) || (typeof ALL_PRODUCTS !== 'undefined' ? ALL_PRODUCTS : {});
+        select.innerHTML = Object.values(prodPool).map(p => `
+          <option value="${p.id}" data-price="${p.price}" data-title="${p.title}" data-image="${p.image}">${p.title} (Rs. ${p.price.toLocaleString()})</option>
+        `).join('');
+      }
+      handleManualProductChange();
+      document.getElementById('addOrderModal').classList.add('open');
+    }
+
+    function closeAddOrderModal() {
+      document.getElementById('addOrderModal').classList.remove('open');
+    }
+
+    function handleManualProductChange() {
+      calcManualTotal();
+    }
+
+    function calcManualTotal() {
+      const select = document.getElementById('manualOrderProduct');
+      const qtyInput = document.getElementById('manualOrderQty');
+      const totalInput = document.getElementById('manualOrderTotal');
+      if (!select || !qtyInput || !totalInput) return;
+      const opt = select.options[select.selectedIndex];
+      const price = opt ? Number(opt.dataset.price) || 0 : 0;
+      const qty = Number(qtyInput.value) || 1;
+      const fee = (price * qty) >= 3000 ? 0 : 250;
+      totalInput.value = (price * qty) + fee;
+    }
+
+    function handleManualOrderSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('manualCustName').value.trim();
+      const phone = document.getElementById('manualCustPhone').value.trim();
+      const city = document.getElementById('manualCustCity').value.trim() || 'Karachi';
+      const address = document.getElementById('manualCustAddress').value.trim();
+      const qty = Number(document.getElementById('manualOrderQty').value) || 1;
+      const total = Number(document.getElementById('manualOrderTotal').value) || 0;
+      const method = document.getElementById('manualOrderMethod').value;
+      const notes = document.getElementById('manualCustNotes').value.trim();
+
+      const select = document.getElementById('manualOrderProduct');
+      const opt = select ? select.options[select.selectedIndex] : null;
+      const pId = select ? select.value : 'p1';
+      const pTitle = opt ? opt.dataset.title : 'Luxury Product';
+      const pPrice = opt ? Number(opt.dataset.price) || 0 : 0;
+      const pImage = opt ? opt.dataset.image : 'airpod_a1.jpg';
+
+      const genId = 'AR-' + Math.floor(100000 + Math.random() * 900000);
+      const newOrder = {
+        id: genId,
+        orderId: genId,
+        customer: { name, phone, address, city },
+        customerName: name,
+        phone,
+        address,
+        city,
+        notes,
+        paymentMethod: method,
+        items: [{
+          id: pId,
+          productId: pId,
+          title: pTitle,
+          price: pPrice,
+          quantity: qty,
+          selectedSize: 'Standard',
+          image: pImage
+        }],
+        subtotal: pPrice * qty,
+        deliveryFee: (pPrice * qty) >= 3000 ? 0 : 250,
+        total: total,
+        status: 'Pending',
+        createdAt: new Date().toISOString()
+      };
+
+      ALL_ORDERS.unshift(newOrder);
+
+      // Save to localStorage
+      try {
+        const stored = JSON.parse(localStorage.getItem('ar_luxury_orders') || '[]');
+        stored.unshift(newOrder);
+        localStorage.setItem('ar_luxury_orders', JSON.stringify(stored));
+      } catch (err) {}
+
+      // Re-render table & KPIs
+      renderOrdersTable(ALL_ORDERS);
+      renderRecentOrders(ALL_ORDERS.slice(0, 5));
+      document.getElementById('kpiTotalOrders').textContent = ALL_ORDERS.length;
+      document.getElementById('kpiPendingOrders').textContent = ALL_ORDERS.filter(o => o.status === 'Pending').length;
+
+      closeAddOrderModal();
+      showToast('🎉 Naya order record hogaya! Slip generate ki ja rahi hai...');
+      
+      // Immediately open print slip for courier dispatch!
+      setTimeout(() => {
+        openPrintModal(genId);
+      }, 350);
     }
 
     // Populate Store Settings from backend
