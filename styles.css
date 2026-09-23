@@ -2533,3 +2533,88 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   }
 }
 
+/* ════ SALE / NEW ARRIVAL SALE STYLES ════ */
+.nav-sale-link {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+  background: rgba(220, 38, 38, 0.08);
+  padding: 4px 12px !important;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+.nav-sale-link:hover {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.sale-top-banner {
+  background: linear-gradient(135deg, #fff1f2 0%, #fee2e2 50%, #fef3c7 100%);
+  border: 1px solid #fecaca;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.sale-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+}
+
+.sale-timer-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #991b1b;
+  background: #fee2e2;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #fca5a5;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dc2626;
+  box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+  animation: pulseSaleDot 1.6s infinite;
+  display: inline-block;
+}
+
+@keyframes pulseSaleDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.sale-cat-card {
+  border: 2px solid #fecaca !important;
+  background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100%) !important;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.08) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.sale-cat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15) !important;
+}
+
+

@@ -3,8 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Store — Shop Globally, Pay Locally | Pakistan</title>
-  <meta name="description" content="AR Store Pakistan — AirPods, Tech Gadgets, Beauty & Skincare, Luxury Watches. Cash on Delivery Karachi.">
+  <title>AR Luxury Store — Shop Online in Pakistan | Cash on Delivery</title>
+  <meta name="description" content="AR Luxury Store Pakistan — Buy luxury AirPods, Tech Gadgets, Beauty & Skincare, and Smart Watches online. Fast Cash on Delivery across Karachi & Pakistan.">
+  <meta name="keywords" content="AR Luxury Store, AR Store, luxury watches, airpods pakistan, online shopping karachi">
+  
+  <!-- Google & Social Media Rich Snippet (Image + Brand Title) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AR Luxury Store">
+  <meta property="og:title" content="AR Luxury Store — Premium Online Store in Pakistan">
+  <meta property="og:description" content="Shop luxury AirPods, Tech Gadgets, Beauty & Skincare, and Watches at AR Luxury Store. Cash on delivery available.">
+  <meta property="og:image" content="https://ar-luxury-store.vercel.app/hero-brand.jpg">
+  <meta property="og:url" content="https://ar-luxury-store.vercel.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AR Luxury Store — Pakistan">
+  <meta name="twitter:image" content="https://ar-luxury-store.vercel.app/hero-brand.jpg">
+
+  <!-- Schema.org JSON-LD for Google Search Results with Brand Image -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OnlineStore",
+    "name": "AR Luxury Store",
+    "url": "https://ar-luxury-store.vercel.app/",
+    "logo": "https://ar-luxury-store.vercel.app/hero-brand.jpg",
+    "image": "https://ar-luxury-store.vercel.app/hero-brand.jpg",
+    "description": "AR Luxury Store Pakistan — AirPods, Tech Gadgets, Beauty & Skincare, Luxury Watches.",
+    "priceRange": "Rs. 950 - Rs. 4,500"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +42,7 @@
   <!-- Announce Bar -->
   <div class="announce-bar">
     <span>📦 Free delivery on orders over Rs. 3,000 in Karachi</span>
-    <span>💵 Cash on Delivery — Open Box Inspection Allowed</span>
+    <span>💵 Cash on Delivery Available Across Pakistan</span>
     <a href="#dealsSection">🔥 Deals Live Now →</a>
   </div>
 
@@ -36,13 +63,14 @@
       <div class="header-search">
         <select class="search-cat-select" id="searchCategorySelect" aria-label="Category">
           <option value="all">All</option>
+          <option value="sale">🔥 Sale / New Arrivals</option>
           <option value="airpods">AirPods</option>
           <option value="tech">Tech</option>
           <option value="beauty">Beauty</option>
           <option value="watches">Watches</option>
         </select>
         <div class="search-input-wrap">
-          <input type="search" class="search-input" id="mainSearchInput" placeholder="Search AirPods, Tech, Beauty, Watches..." autocomplete="off" aria-label="Search">
+          <input type="search" class="search-input" id="mainSearchInput" placeholder="Search AirPods, Tech, Beauty, Watches, Sale..." autocomplete="off" aria-label="Search">
           <div class="search-dropdown" id="searchDropdown"></div>
         </div>
         <button class="search-btn" id="searchSubmitBtn" aria-label="Search">
@@ -60,9 +88,10 @@
       </a>
     </div>
 
-    <!-- Nav — exactly 4 active categories -->
+    <!-- Nav with Sale & 4 active categories -->
     <nav class="site-nav">
       <div class="site-nav-inner">
+        <a href="#saleSection" class="nav-link nav-sale-link">🔥 Sale / New Arrival Sale</a>
         <a href="#airpodsSection" class="nav-link">🎧 AirPods &amp; Audio</a>
         <a href="#techSection"    class="nav-link">⚡ Tech Gadgets</a>
         <a href="#beautySection"  class="nav-link">💄 Beauty &amp; Skincare</a>
@@ -98,8 +127,238 @@
       </div>
     </section>
 
-    <!-- ══ ALL 4 MAIN CATEGORIES ══ -->
+    <!-- ══ TOP PROMINENT HEADING: SALE / NEW ARRIVAL SALE ══ -->
+    <section class="section-bg section-gap sale-top-banner" id="saleSection">
+      <div class="section-title-row" style="margin-bottom: 18px; align-items: flex-start;">
+        <div>
+          <span class="sale-badge-pill">🔥 Mega Discount Sale &bull; New Arrival Collection</span>
+          <h1 style="margin-top: 8px; font-size: 1.85rem; font-weight: 800; color: #111827; letter-spacing: -0.02em;">Sale / New Arrival Sale</h1>
+          <p style="color: #6b7280; font-size: 0.92rem; margin-top: 4px; max-width: 700px;">Exclusive launch deals up to 56% OFF. Cash on Delivery across Karachi &amp; Pakistan &bull; 100% Genuine Quality Guaranteed.</p>
+        </div>
+        <div class="sale-timer-tag">
+          <span class="pulse-dot"></span> 20 Mega Deals Total &bull; 10 Deals Active (Batch 1 &amp; 2)
+        </div>
+      </div>
+      <div class="airpods-showcase-grid" id="saleGrid">
+        <!-- Product 1: Plastic Printed Straw Tumbler -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s1')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">50% OFF</span>
+            <img src="images/sale_tumbler_straw_500.png" alt="Plastic Printed DIP AND DRINK Straw TUMBLER">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s1')" title="Plastic Printed DIP AND DRINK Straw TUMBLER">Plastic Printed DIP AND DRINK Straw TUMBLER</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (185 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 500</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 1,000</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s1')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Bruno Vegetable Cutter Slicer -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s2')">
+            <span class="badge-tag" style="background:#b91c1c;color:#fff;">Mega Deal</span>
+            <img src="images/sale_bruno_cutter_550.png" alt="Bruno Vegetable Cutter slicer">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s2')" title="Bruno Vegetable Cutter slicer">Bruno Vegetable Cutter slicer</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (140 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 550</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 1,200</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s2')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: 13 PCs Velvet Potli Brush Set -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s3')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">40% OFF</span>
+            <img src="images/sale_velvet_brush_set_350.png" alt="13 PCs Valvet potli Brush Set">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s3')" title="13 PCs Valvet potli Brush Set">13 PCs Valvet potli Brush Set</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (210 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 350</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 700</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s3')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: 5 in 1 Lipstick Set -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s4')">
+            <span class="badge-tag" style="background:#b91c1c;color:#fff;">Hot Seller</span>
+            <img src="images/sale_5in1_lipstick_set_350.png" alt="5 in 1 Lipstick Set">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s4')" title="5 in 1 Lipstick Set">5 in 1 Lipstick Set</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (195 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 350</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 800</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s4')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: Pack of 3pcs Multicolour Tumbler Bottle set -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s5')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">38% OFF</span>
+            <img src="images/sale_tumbler_3pcs_set_1500.png" alt="Pack of 3pcs Multicolour Tumbler Bottle set with Shopper Packing">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s5')" title="Pack of 3pcs Multicolour Tumbler Bottle set with Shopper Packing (Mix/Random colour)">Pack of 3pcs Multicolour Tumbler Bottle set with Shopper Packing</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>5.0 (260 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 1,500</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 2,500</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s5')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6: 3 Section Plastic Food Storage Container -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s6')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">41% OFF</span>
+            <img src="images/sale_food_container_750.png" alt="3 Section Plastic Food Storage Container">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s6')" title="3 Section Plastic Food Storage Container">3 Section Plastic Food Storage Container</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (165 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 750</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 1,300</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s6')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7: Mini USB Electric Mosquito Racket -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s7')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">25% OFF</span>
+            <img src="images/sale_mosquito_racket_650.png" alt="Mini USB Electric Mosquito Racket">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s7')" title="Mini USB Electric Mosquito Racket">Mini USB Electric Mosquito Racket</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (190 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 650</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 900</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s7')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8: Chargable Hand Held Fan With Ring Light -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s8')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">25% OFF</span>
+            <img src="images/sale_fan_ringlight_750.png" alt="Chargable Hand Held Fan With Ring Light">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s8')" title="Chargable Hand Held Fan With Ring Light">Chargable Hand Held Fan With Ring Light</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (178 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 750</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 1,000</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s8')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9: High Pressure Water Nozzle -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s9')">
+            <span class="badge-tag" style="background:#b91c1c;color:#fff;">Mega Deal</span>
+            <img src="images/sale_water_nozzle_200.png" alt="High Pressure Water Nozzle">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s9')" title="High Pressure Water Nozzle">High Pressure Water Nozzle</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.8 (310 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 200</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 500</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s9')">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10: Magic Hose Pipe 100 ft – 30m -->
+        <div class="product-item-card">
+          <div class="card-img-wrap" onclick="openProductModal('s10')">
+            <span class="badge-tag" style="background:#dc2626;color:#fff;">36% OFF</span>
+            <img src="images/sale_magic_hose_1000.png" alt="Magic Hose Pipe 100 ft – 30m">
+            <div class="click-to-view-hint">Quick View / Inspect</div>
+          </div>
+          <div class="card-meta-box">
+            <h4 class="card-p-title" onclick="openProductModal('s10')" title="Magic Hose Pipe 100 ft – 30m">Magic Hose Pipe 100 ft – 30m</h4>
+            <div class="card-stars-row"><span class="gold-star">★★★★★</span><span>4.9 (240 reviews)</span></div>
+            <div class="card-price-bottom">
+              <div>
+                <span class="price-in-pkr">Rs. 1,000</span>
+                <span style="font-size:0.75rem;color:#9ca3af;text-decoration:line-through;margin-left:6px;">Rs. 1,600</span>
+              </div>
+              <button class="btn-card-add-quick" onclick="addToCart('s10')">Add +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ MAIN CATEGORIES (INCLUDING SALE / NEW ARRIVALS) ══ -->
     <div class="home-grid section-gap" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+      <!-- Sale / New Arrival Sale Category Card -->
+      <div class="category-block sale-cat-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <h3 style="color:#b91c1c;margin:0;">🔥 Sale / New Arrival Sale</h3>
+          <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:12px;">HOT DEALS</span>
+        </div>
+        <div class="cat-image-grid">
+          <div class="cat-image-item" onclick="window.location.href='#saleSection'"><img src="images/sale_tumbler_straw_500.png" alt="Straw Tumbler"><span>Straw Tumbler</span></div>
+          <div class="cat-image-item" onclick="window.location.href='#saleSection'"><img src="images/sale_bruno_cutter_550.png" alt="Bruno Cutter"><span>Bruno Cutter</span></div>
+          <div class="cat-image-item" onclick="window.location.href='#saleSection'"><img src="images/sale_velvet_brush_set_350.png" alt="13 Pcs Brush Set"><span>13 Pcs Brush</span></div>
+          <div class="cat-image-item" onclick="window.location.href='#saleSection'"><img src="images/sale_5in1_lipstick_set_350.png" alt="5 in 1 Lipstick"><span>5-in-1 Lipstick</span></div>
+        </div>
+        <a class="cat-see-more" href="#saleSection" style="color:#b91c1c;font-weight:700;">Explore All 20 Sale Deals →</a>
+      </div>
 
       <!-- AirPods & Audio -->
       <div class="category-block">
@@ -155,8 +414,8 @@
     <div class="trust-strip section-gap">
       <div class="trust-item"><span class="trust-icon">🚚</span><div class="trust-info"><strong>5–6 Days Delivery</strong><span>Express courier Karachi</span></div></div>
       <div class="trust-item"><span class="trust-icon">💵</span><div class="trust-info"><strong>Cash on Delivery</strong><span>Pay when parcel arrives</span></div></div>
-      <div class="trust-item"><span class="trust-icon">📦</span><div class="trust-info"><strong>Open Box Inspection</strong><span>Check before you pay</span></div></div>
-      <div class="trust-item"><span class="trust-icon">🔄</span><div class="trust-info"><strong>7-Day Returns</strong><span>Easy hassle-free returns</span></div></div>
+      <div class="trust-item"><span class="trust-icon">⭐</span><div class="trust-info"><strong>100% Genuine Quality</strong><span>Premium curated products</span></div></div>
+      <div class="trust-item"><span class="trust-icon">💬</span><div class="trust-info"><strong>WhatsApp Support</strong><span>Fast responsive assistance</span></div></div>
     </div>
 
     <!-- ══ PRODUCT SECTIONS — same names as categories ══ -->
